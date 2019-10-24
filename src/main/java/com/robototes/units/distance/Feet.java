@@ -42,7 +42,7 @@ public class Feet extends DistanceUnit {
 
 	@Override
 	public String getTextUnit() {
-		return unit;
+		return "ft";
 	}
 
 	@Override

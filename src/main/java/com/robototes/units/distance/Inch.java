@@ -42,7 +42,7 @@ public class Inch extends DistanceUnit {
 
 	@Override
 	public String getTextUnit() {
-		return unit + "(es)";
+		return "in";
 	}
 
 	@Override
