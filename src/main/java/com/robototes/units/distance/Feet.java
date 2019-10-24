@@ -6,28 +6,28 @@ import com.robototes.units.IUnit;
 /**
  * 
  * @author Eli Orona
- * @class A representation of inches in the program.
+ * @class A representation of feet in the program.
  */
-public class Inch extends DistanceUnit {
+public class Feet extends DistanceUnit {
 
-	protected static String unit = "Inch";
+	protected static String unit = "Feet";
 
-	public Inch(double value) {
+	public Feet(double value) {
 		super(value);
 	}
 
-	public Inch() {
+	public Feet() {
 		super();
 	}
 
 	@Override
 	public Feet toFeet() {
-		return DistanceRatios.inchesToFeet.compute(this);
+		return this;
 	}
 
 	@Override
 	public Inch toInches() {
-		return this;
+		return DistanceRatios.inchesToFeet.reverseCompute(this);
 	}
 
 	@Override
@@ -42,21 +42,21 @@ public class Inch extends DistanceUnit {
 
 	@Override
 	public String getTextUnit() {
-		return unit + "(es)";
+		return unit;
 	}
 
 	@Override
 	public IUnit createInstance() {
-		return new Inch(0);
+		return new Feet(0);
 	}
 
 	@Override
 	public Centimeter toCm() {
-		return DistanceRatios.cmToInches.reverseCompute(this);
+		return DistanceRatios.cmToFeet.reverseCompute(this);
 	}
 
 	@Override
 	public Meter toMeters() {
-		return DistanceRatios.metersToInches.reverseCompute(this);
+		return DistanceRatios.metersToFeet.reverseCompute(this);
 	}
 }

@@ -14,8 +14,9 @@ public class BasicUnit implements IUnit {
 	}
 
 	@Override
-	public void setValue(double value) {
+	public BasicUnit setValue(double value) {
 		this.value = value;
+		return this;
 	}
 
 	@Override
@@ -45,6 +46,11 @@ public class BasicUnit implements IUnit {
 	@Override
 	public String getTextUnit() {
 		return unit;
+	}
+
+	@Override
+	public IUnit createInstance() {
+		return new BasicUnit(0, unit);
 	}
 
 }
