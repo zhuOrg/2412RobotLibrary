@@ -1,9 +1,15 @@
-package com.robototes;
+package com.robototes.utils;
 
 import java.text.DecimalFormat;
 
-public class CommonFunctions {
+public class StringUtils {
 
+	/**
+	 * 
+	 * @param string  The string to be repeated
+	 * @param repeats The number of repeats
+	 * @return The repeated string
+	 */
 	public static String repeatString(String string, int repeats) {
 		String returnString = "";
 
@@ -22,7 +28,7 @@ public class CommonFunctions {
 	 */
 	public static String getFormattedValue(double value, int valueLength) {
 
-		DecimalFormat formatter = new DecimalFormat("#." + CommonFunctions.repeatString("#", valueLength));
+		DecimalFormat formatter = new DecimalFormat("#." + StringUtils.repeatString("#", valueLength));
 
 		return formatter.format(value);
 	}

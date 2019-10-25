@@ -1,6 +1,6 @@
 package com.robototes.units;
 
-import com.robototes.CommonFunctions;
+import com.robototes.utils.StringUtils;
 
 public class Ratio<T extends IUnit, V extends IUnit> {
 
@@ -69,8 +69,8 @@ public class Ratio<T extends IUnit, V extends IUnit> {
 	 */
 	public String toString() {
 		return valueInReference.getUnit() + " to " + valueOutReference.getUnit() + ", "
-				+ CommonFunctions.getFormattedValue(ratioValue, 6) + " " + valueInReference.getTextUnit() + "/"
-				+ valueOutReference.getTextUnit() + ", " + CommonFunctions.getFormattedValue(1d / ratioValue, 6) + " "
+				+ StringUtils.getFormattedValue(ratioValue, 6) + " " + valueInReference.getTextUnit() + "/"
+				+ valueOutReference.getTextUnit() + ", " + StringUtils.getFormattedValue(1d / ratioValue, 6) + " "
 				+ valueOutReference.getTextUnit() + "/" + valueInReference.getTextUnit();
 	}
 

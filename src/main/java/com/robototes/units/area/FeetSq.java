@@ -1,4 +1,4 @@
-package com.robototes.units.distance;
+package com.robototes.units.area;
 
 import com.robototes.units.IUnit;
 
@@ -7,26 +7,26 @@ import com.robototes.units.IUnit;
  * @author Eli Orona
  * @class A representation of feet in the program.
  */
-public class Feet extends DistanceUnit {
+public class FeetSq extends AreaUnit {
 
-	protected static String unit = "Feet";
+	protected static String unit = "FeetSq";
 
-	public Feet(double value) {
+	public FeetSq(double value) {
 		super(value);
 	}
 
-	public Feet() {
+	public FeetSq() {
 		super();
 	}
 
 	@Override
-	public Feet toFeet() {
+	public FeetSq toFeetSq() {
 		return this;
 	}
 
 	@Override
-	public Inch toInches() {
-		return DistanceRatios.inchesToFeet.reverseCompute(this);
+	public InchSq toInchesSq() {
+		return AreaRatios.inchesSqToFeetSq.reverseCompute(this);
 	}
 
 	@Override
@@ -41,21 +41,21 @@ public class Feet extends DistanceUnit {
 
 	@Override
 	public String getTextUnit() {
-		return "ft";
+		return "ft^2";
 	}
 
 	@Override
 	public IUnit createInstance() {
-		return new Feet(0);
+		return new FeetSq(0);
 	}
 
 	@Override
-	public Centimeter toCm() {
-		return DistanceRatios.cmToFeet.reverseCompute(this);
+	public CentimeterSq toCmSq() {
+		return AreaRatios.cmSqToFeetSq.reverseCompute(this);
 	}
 
 	@Override
-	public Meter toMeters() {
-		return DistanceRatios.metersToFeet.reverseCompute(this);
+	public MeterSq toMetersSq() {
+		return AreaRatios.metersSqToFeetSq.reverseCompute(this);
 	}
 }

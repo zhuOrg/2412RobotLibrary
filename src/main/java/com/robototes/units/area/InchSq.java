@@ -1,4 +1,4 @@
-package com.robototes.units.distance;
+package com.robototes.units.area;
 
 import com.robototes.units.IUnit;
 
@@ -7,25 +7,25 @@ import com.robototes.units.IUnit;
  * @author Eli Orona
  * @class A representation of inches in the program.
  */
-public class Inch extends DistanceUnit {
+public class InchSq extends AreaUnit {
 
-	protected static String unit = "Inch";
+	protected static String unit = "InchSq";
 
-	public Inch(double value) {
+	public InchSq(double value) {
 		super(value);
 	}
 
-	public Inch() {
+	public InchSq() {
 		super();
 	}
 
 	@Override
-	public Feet toFeet() {
-		return DistanceRatios.inchesToFeet.compute(this);
+	public FeetSq toFeetSq() {
+		return AreaRatios.inchesSqToFeetSq.compute(this);
 	}
 
 	@Override
-	public Inch toInches() {
+	public InchSq toInchesSq() {
 		return this;
 	}
 
@@ -41,21 +41,21 @@ public class Inch extends DistanceUnit {
 
 	@Override
 	public String getTextUnit() {
-		return "in";
+		return "in^2";
 	}
 
 	@Override
 	public IUnit createInstance() {
-		return new Inch(0);
+		return new InchSq(0);
 	}
 
 	@Override
-	public Centimeter toCm() {
-		return DistanceRatios.cmToInches.reverseCompute(this);
+	public CentimeterSq toCmSq() {
+		return AreaRatios.cmSqToInchesSq.reverseCompute(this);
 	}
 
 	@Override
-	public Meter toMeters() {
-		return DistanceRatios.metersToInches.reverseCompute(this);
+	public MeterSq toMetersSq() {
+		return AreaRatios.metersSqToInchesSq.reverseCompute(this);
 	}
 }

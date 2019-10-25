@@ -1,4 +1,4 @@
-package com.robototes.units.distance;
+package com.robototes.units.area;
 
 import com.robototes.units.IUnit;
 
@@ -7,15 +7,15 @@ import com.robototes.units.IUnit;
  * @author Eli Orona
  * @class A representation of centimeters in the program.
  */
-public class Centimeter extends DistanceUnit {
+public class CentimeterSq extends AreaUnit {
 
-	public static String unit = "Centimeter";
+	public static String unit = "CentimeterSq";
 
-	public Centimeter(double value) {
+	public CentimeterSq(double value) {
 		super(value);
 	}
 
-	public Centimeter() {
+	public CentimeterSq() {
 		super();
 	}
 
@@ -26,22 +26,22 @@ public class Centimeter extends DistanceUnit {
 
 	@Override
 	public String getTextUnit() {
-		return "cm";
+		return "cm^2";
 	}
 
 	@Override
 	public IUnit createInstance() {
-		return new Centimeter(0);
+		return new CentimeterSq(0);
 	}
 
 	@Override
-	public Feet toFeet() {
-		return DistanceRatios.cmToFeet.compute(this);
+	public FeetSq toFeetSq() {
+		return AreaRatios.cmSqToFeetSq.compute(this);
 	}
 
 	@Override
-	public Inch toInches() {
-		return DistanceRatios.cmToInches.compute(this);
+	public InchSq toInchesSq() {
+		return AreaRatios.cmSqToInchesSq.compute(this);
 	}
 
 	@Override
@@ -50,13 +50,13 @@ public class Centimeter extends DistanceUnit {
 	}
 
 	@Override
-	public Centimeter toCm() {
+	public CentimeterSq toCmSq() {
 		return this;
 	}
 
 	@Override
-	public Meter toMeters() {
-		return DistanceRatios.metersToCm.reverseCompute(this);
+	public MeterSq toMetersSq() {
+		return AreaRatios.metersSqToCmSq.reverseCompute(this);
 	}
 
 }

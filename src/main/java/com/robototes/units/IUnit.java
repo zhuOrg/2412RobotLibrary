@@ -1,5 +1,8 @@
 package com.robototes.units;
 
+import com.robototes.units.distance.DistanceUnit;
+import com.robototes.units.distance.Meter;
+
 /**
  * 
  * @author Eli Orona
@@ -45,4 +48,33 @@ public interface IUnit {
 	 * @return A new instance of a unit, can be useful in some places.
 	 */
 	public IUnit createInstance();
+
+	/**
+	 * 
+	 * @param other Unit to multiply by
+	 * @return The two units multiplied, often converted to a default type or basic
+	 *         unit
+	 */
+	public IUnit multiply(IUnit other);
+
+	/**
+	 * 
+	 * @param other Unit to divide by.
+	 * @return The two units divided, often converted to a default type or basic
+	 *         unit
+	 */
+	public IUnit divide(IUnit other);
+
+	public default <T extends IUnit> IUnit toUnit(Class<T> newUnit) {
+		try {
+			if (newUnit.newInstance().getTextUnit().equals(this.getTextUnit())) {
+				return newUnit.newInstance().setValue(this.getValue());
+			}
+		} catch (Exception e) {
+
+		}
+		return null;
+
+	}
+
 }

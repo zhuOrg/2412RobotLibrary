@@ -1,4 +1,4 @@
-package com.robototes.units.distance;
+package com.robototes.units.area;
 
 import com.robototes.units.IUnit;
 
@@ -7,15 +7,15 @@ import com.robototes.units.IUnit;
  * @author Eli Orona
  * @class A representation of meters in the program.
  */
-public class Meter extends DistanceUnit {
+public class MeterSq extends AreaUnit {
 
-	public static String unit = "Meter";
+	public static String unit = "MeterSq";
 
-	public Meter(double value) {
+	public MeterSq(double value) {
 		super(value);
 	}
 
-	public Meter() {
+	public MeterSq() {
 		super();
 	}
 
@@ -26,22 +26,22 @@ public class Meter extends DistanceUnit {
 
 	@Override
 	public String getTextUnit() {
-		return "m";
+		return "m^2";
 	}
 
 	@Override
 	public IUnit createInstance() {
-		return new Meter(0);
+		return new MeterSq(0);
 	}
 
 	@Override
-	public Feet toFeet() {
-		return DistanceRatios.metersToFeet.compute(this);
+	public FeetSq toFeetSq() {
+		return AreaRatios.metersSqToFeetSq.compute(this);
 	}
 
 	@Override
-	public Inch toInches() {
-		return DistanceRatios.metersToInches.compute(this);
+	public InchSq toInchesSq() {
+		return AreaRatios.metersSqToInchesSq.compute(this);
 	}
 
 	@Override
@@ -50,12 +50,12 @@ public class Meter extends DistanceUnit {
 	}
 
 	@Override
-	public Centimeter toCm() {
-		return DistanceRatios.metersToCm.compute(this);
+	public CentimeterSq toCmSq() {
+		return AreaRatios.metersSqToCmSq.compute(this);
 	}
 
 	@Override
-	public Meter toMeters() {
+	public MeterSq toMetersSq() {
 		return this;
 	}
 

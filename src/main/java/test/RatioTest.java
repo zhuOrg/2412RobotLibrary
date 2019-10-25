@@ -17,5 +17,7 @@ public class RatioTest {
 		System.out.println(DistanceRatios.cmToFeet.compute(cmTest));
 		System.out.println(DistanceRatios.cmToFeet.reverseCompute(feetTest));
 		System.out.println(DistanceRatios.cmToFeet);
+		
+		System.out.println(inchTest.getClass().getSuperclass().getName());
 	}
 }
