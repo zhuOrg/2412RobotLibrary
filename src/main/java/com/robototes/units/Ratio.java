@@ -2,7 +2,7 @@ package com.robototes.units;
 
 import com.robototes.utils.StringUtils;
 
-public class Ratio<T extends IUnit, V extends IUnit> {
+public class Ratio<T extends IUnitType, V extends IUnitType> {
 
 	private double ratioValue;
 	private T valueInReference;
@@ -28,7 +28,7 @@ public class Ratio<T extends IUnit, V extends IUnit> {
 	 * @param a   Ratio a
 	 * @param b   Ratio b, must have same first unit as a's second unit.
 	 */
-	public <E extends IUnit> Ratio(Ratio<T, E> a, Ratio<E, V> b) {
+	public <E extends IUnitType> Ratio(Ratio<T, E> a, Ratio<E, V> b) {
 		this.ratioValue = a.getRatioValue() * b.getRatioValue();
 		this.valueInReference = a.valueInReference;
 		this.valueOutReference = b.valueOutReference;
@@ -42,7 +42,8 @@ public class Ratio<T extends IUnit, V extends IUnit> {
 	 */
 	@SuppressWarnings("unchecked")
 	public V compute(T input) {
-		return (V) valueOutReference.createInstance().setValue((input.getValue() * ratioValue));
+//		return (V) valueOutReference.createInstance().setValue((input.getValue() * ratioValue));
+		return null;
 	}
 
 	/**
@@ -53,7 +54,8 @@ public class Ratio<T extends IUnit, V extends IUnit> {
 	 */
 	@SuppressWarnings("unchecked")
 	public T reverseCompute(V input) {
-		return (T) valueInReference.createInstance().setValue((input.getValue() * 1d / ratioValue));
+//		return (T) valueInReference.createInstance().setValue((input.getValue() * 1d / ratioValue));
+		return null;
 	}
 
 	/**
@@ -69,9 +71,9 @@ public class Ratio<T extends IUnit, V extends IUnit> {
 	 */
 	public String toString() {
 		return valueInReference.getUnit() + " to " + valueOutReference.getUnit() + ", "
-				+ StringUtils.getFormattedValue(ratioValue, 6) + " " + valueInReference.getTextUnit() + "/"
-				+ valueOutReference.getTextUnit() + ", " + StringUtils.getFormattedValue(1d / ratioValue, 6) + " "
-				+ valueOutReference.getTextUnit() + "/" + valueInReference.getTextUnit();
+				+ StringUtils.getFormattedValue(ratioValue, 6) + " " + valueInReference.getUnit() + "/"
+				+ valueOutReference.getUnit() + ", " + StringUtils.getFormattedValue(1d / ratioValue, 6) + " "
+				+ valueOutReference.getUnit() + "/" + valueInReference.getUnit();
 	}
 
 }

@@ -43,33 +43,29 @@ public abstract class AreaUnit implements IUnit {
 		return this.area;
 	}
 
-	@Override
-	public String getFormattedValue(int valueLength) {
-		return StringUtils.getFormattedValue(area, valueLength);
-	}
 
-	@Override
-	public IUnit multiply(IUnit other) {
-
-		if (other.getClass().getSuperclass().getTypeName().equals("com.robototes.units.area.AreaUnit")) {
-			return new BasicUnit(this.toMetersSq().getValue() * ((AreaUnit) other).toMetersSq().getValue(), "m^4");
-		} else if (other.getClass().getSuperclass().getTypeName().equals("com.robototes.units.distance.DistanceUnit")) {
-			return new BasicUnit(this.toMetersSq().getValue() * ((DistanceUnit) other).toMeters().getValue(), "m^3");
-		}
-
-		return null;
-	}
-
-	@Override
-	public IUnit divide(IUnit other) {
-		if (other.getClass().getSuperclass().getTypeName().equals("com.robototes.units.area.AreaUnit")) {
-			return new BasicUnit(this.toMetersSq().getValue() / ((AreaUnit) other).toMetersSq().getValue(), "");
-		} else if (other.getClass().getSuperclass().getTypeName().equals("com.robototes.units.distance.DistanceUnit")) {
-			return new Meter(this.toMetersSq().getValue() / ((DistanceUnit) other).toMeters().getValue());
-		}
-
-		return null;
-	}
+//	@Override
+//	public IUnit multiply(IUnit other) {
+//
+//		if (other.getClass().getSuperclass().getTypeName().equals("com.robototes.units.area.AreaUnit")) {
+//			return new BasicUnit(this.toMetersSq().getValue() * ((AreaUnit) other).toMetersSq().getValue(), "m^4");
+//		} else if (other.getClass().getSuperclass().getTypeName().equals("com.robototes.units.distance.DistanceUnit")) {
+//			return new BasicUnit(this.toMetersSq().getValue() * ((DistanceUnit) other).toMeters().getValue(), "m^3");
+//		}
+//
+//		return null;
+//	}
+//
+//	@Override
+//	public IUnit divide(IUnit other) {
+//		if (other.getClass().getSuperclass().getTypeName().equals("com.robototes.units.area.AreaUnit")) {
+//			return new BasicUnit(this.toMetersSq().getValue() / ((AreaUnit) other).toMetersSq().getValue(), "");
+//		} else if (other.getClass().getSuperclass().getTypeName().equals("com.robototes.units.distance.DistanceUnit")) {
+//			return new Meter(this.toMetersSq().getValue() / ((DistanceUnit) other).toMeters().getValue());
+//		}
+//
+//		return null;
+//	}
 
 	/**
 	 * 

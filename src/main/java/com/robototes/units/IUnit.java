@@ -2,6 +2,7 @@ package com.robototes.units;
 
 import com.robototes.units.distance.DistanceUnit;
 import com.robototes.units.distance.Meter;
+import com.robototes.utils.StringUtils;
 
 /**
  * 
@@ -35,7 +36,9 @@ public interface IUnit {
 	 *                    above 0)
 	 * @return The formatted value of the unit as a string
 	 */
-	public String getFormattedValue(int valueLength);
+	public default String getFormattedValue(int valueLength) {
+		return StringUtils.getFormattedValue(this.getValue(), valueLength);
+	}
 
 	/**
 	 * 
@@ -49,21 +52,21 @@ public interface IUnit {
 	 */
 	public IUnit createInstance();
 
-	/**
-	 * 
-	 * @param other Unit to multiply by
-	 * @return The two units multiplied, often converted to a default type or basic
-	 *         unit
-	 */
-	public IUnit multiply(IUnit other);
-
-	/**
-	 * 
-	 * @param other Unit to divide by.
-	 * @return The two units divided, often converted to a default type or basic
-	 *         unit
-	 */
-	public IUnit divide(IUnit other);
+//	/**
+//	 * 
+//	 * @param other Unit to multiply by
+//	 * @return The two units multiplied, often converted to a default type or basic
+//	 *         unit
+//	 */
+//	public IUnit multiply(IUnit other);
+//
+//	/**
+//	 * 
+//	 * @param other Unit to divide by.
+//	 * @return The two units divided, often converted to a default type or basic
+//	 *         unit
+//	 */
+//	public IUnit divide(IUnit other);
 
 	public default <T extends IUnit> IUnit toUnit(Class<T> newUnit) {
 		try {

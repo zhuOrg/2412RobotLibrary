@@ -7,16 +7,17 @@ import com.robototes.units.IUnit;
  * @author Eli Orona
  * @class A representation of meters in the program.
  */
-public class Meter extends DistanceUnit {
+public class Meter implements IUnit {
 
+	private double value;
 	public static String unit = "Meter";
 
 	public Meter(double value) {
-		super(value);
+		this.value = 0;
 	}
 
 	public Meter() {
-		super();
+		this(0);
 	}
 
 	@Override
@@ -35,27 +36,18 @@ public class Meter extends DistanceUnit {
 	}
 
 	@Override
-	public Feet toFeet() {
-		return DistanceRatios.metersToFeet.compute(this);
-	}
-
-	@Override
-	public Inch toInches() {
-		return DistanceRatios.metersToInches.compute(this);
-	}
-
-	@Override
 	public String toString() {
 		return getFormattedValue(5) + " " + getTextUnit();
 	}
 
 	@Override
-	public Centimeter toCm() {
-		return DistanceRatios.metersToCm.compute(this);
+	public double getValue() {
+		return value;
 	}
 
 	@Override
-	public Meter toMeters() {
+	public IUnit setValue(double value) {
+		this.value = value;
 		return this;
 	}
 
