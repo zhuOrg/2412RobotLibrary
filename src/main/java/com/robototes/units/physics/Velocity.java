@@ -8,6 +8,4 @@ public class Velocity extends BasicUnit {
 		super(value, "m/s");
 	}
 
-	
-	
 }

@@ -1,6 +1,5 @@
 package com.robototes.units;
 
-
 public interface IUnitType {
 	public String getUnit();
 

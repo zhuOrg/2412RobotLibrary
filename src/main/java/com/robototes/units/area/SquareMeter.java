@@ -19,7 +19,7 @@ public class SquareMeter implements IUnit {
 	public SquareMeter() {
 		this(0);
 	}
-	
+
 	public SquareMeter(double value, AreaTypes type) {
 		this.value = type.ratio.compute(value);
 	}

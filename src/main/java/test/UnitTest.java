@@ -7,12 +7,14 @@ import com.robototes.units.distance.Meter;
 public class UnitTest {
 	public static void main(String[] args) {
 
+		System.out.println(DistanceTypes.mainUnit);
+
 		DistanceTypes[] types = DistanceTypes.values();
 
 		for (DistanceTypes type : types) {
 			System.out.println(type.getRatioToDefault());
 		}
-		
+
 		System.out.println();
 
 		AreaTypes[] atypes = AreaTypes.values();
@@ -20,7 +22,7 @@ public class UnitTest {
 		for (AreaTypes type : atypes) {
 			System.out.println(type.getRatioToDefault());
 		}
-		
+
 		System.out.println();
 
 		Meter meterFromFeet = new Meter(10, DistanceTypes.FEET);

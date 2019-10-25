@@ -4,6 +4,7 @@ import com.robototes.units.IUnitType;
 import com.robototes.units.Ratio;
 
 public enum DistanceTypes implements IUnitType {
+
 	METER("m"), //
 	CENTIMETER("cm", new Ratio<DistanceTypes, DistanceTypes>(1d / 100d, METER, null)),
 	INCH("in", new Ratio<DistanceTypes, DistanceTypes>(2.54d, CENTIMETER, null)),
@@ -12,11 +13,12 @@ public enum DistanceTypes implements IUnitType {
 	KILOMETER("km", new Ratio<DistanceTypes, DistanceTypes>(1000d, METER, null)),
 	MILLIMETER("mm", new Ratio<DistanceTypes, DistanceTypes>(1d / 10d, CENTIMETER, null));
 
-	public final char[] unit;
+	public final String unit;
 	public Ratio<DistanceTypes, DistanceTypes> ratio;
+	public static String mainUnit = Meter.class.getName();
 
 	DistanceTypes(String unit, Ratio<DistanceTypes, DistanceTypes> ratioToDefault) {
-		this.unit = unit.toCharArray();
+		this.unit = unit;
 		this.ratio = new Ratio<DistanceTypes, DistanceTypes>(//
 				ratioToDefault.getRatioValue() * ratioToDefault.getValueInReference().ratio.getRatioValue(), //
 				ratioToDefault.getValueInReference().ratio.getValueInReference(), //
@@ -24,13 +26,13 @@ public enum DistanceTypes implements IUnitType {
 	}
 
 	DistanceTypes(String unit) {
-		this.unit = unit.toCharArray();
+		this.unit = unit;
 		this.ratio = new Ratio<DistanceTypes, DistanceTypes>(1, this, this);
 	}
 
 	@Override
 	public String getUnit() {
-		return new String(unit);
+		return unit;
 	}
 
 	@SuppressWarnings("unchecked")

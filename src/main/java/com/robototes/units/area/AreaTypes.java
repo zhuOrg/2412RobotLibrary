@@ -2,6 +2,7 @@ package com.robototes.units.area;
 
 import com.robototes.units.IUnitType;
 import com.robototes.units.Ratio;
+import com.robototes.units.distance.Meter;
 
 public enum AreaTypes implements IUnitType {
 	SQUAREMETER("m^2"), //
@@ -12,11 +13,13 @@ public enum AreaTypes implements IUnitType {
 	SQUAREKILOMETER("km^2", new Ratio<AreaTypes, AreaTypes>(1000d * 1000d, SQUAREMETER, null)),
 	SQUAREMILLIMETER("mm^2", new Ratio<AreaTypes, AreaTypes>((1d / 10d) * (1d / 10d), SQUARECENTIMETER, null));
 
-	public final char[] unit;
+	public final String unit;
 	public Ratio<AreaTypes, AreaTypes> ratio;
 
+	public static String mainUnit = Meter.class.getName();
+
 	AreaTypes(String unit, Ratio<AreaTypes, AreaTypes> ratioToDefault) {
-		this.unit = unit.toCharArray();
+		this.unit = unit;
 		this.ratio = new Ratio<AreaTypes, AreaTypes>(//
 				ratioToDefault.getRatioValue() * ratioToDefault.getValueInReference().ratio.getRatioValue(), //
 				ratioToDefault.getValueInReference().ratio.getValueInReference(), //
@@ -24,13 +27,13 @@ public enum AreaTypes implements IUnitType {
 	}
 
 	AreaTypes(String unit) {
-		this.unit = unit.toCharArray();
+		this.unit = unit;
 		this.ratio = new Ratio<AreaTypes, AreaTypes>(1, this, this);
 	}
 
 	@Override
 	public String getUnit() {
-		return new String(unit);
+		return unit;
 	}
 
 	@SuppressWarnings("unchecked")

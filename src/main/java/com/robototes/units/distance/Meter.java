@@ -19,7 +19,7 @@ public class Meter implements IUnit {
 	public Meter() {
 		this(0);
 	}
-	
+
 	public Meter(double value, DistanceTypes type) {
 		this.value = type.ratio.compute(value);
 	}
