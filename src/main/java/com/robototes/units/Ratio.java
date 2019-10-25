@@ -6,6 +6,15 @@ public class Ratio<T extends IUnitType, V extends IUnitType> {
 
 	private double ratioValue;
 	private T valueInReference;
+
+	public T getValueInReference() {
+		return valueInReference;
+	}
+
+	public V getValueOutReference() {
+		return valueOutReference;
+	}
+
 	private V valueOutReference;
 
 	/**
@@ -36,14 +45,13 @@ public class Ratio<T extends IUnitType, V extends IUnitType> {
 
 	/**
 	 * 
-	 * @param input The unit that with be computed, will be the first class of the
-	 *              ratio.
-	 * @return The second unit of the class, with the input having been converted
+	 * @param input The unit that with be computed, will be a unit of the first
+	 *              UnitType of the ratio.
+	 * @return A unit with the second UnitType of the class, with the input having
+	 *         been converted
 	 */
-	@SuppressWarnings("unchecked")
-	public V compute(T input) {
-//		return (V) valueOutReference.createInstance().setValue((input.getValue() * ratioValue));
-		return null;
+	public double compute(double input) {
+		return ratioValue * input;
 	}
 
 	/**
@@ -52,10 +60,8 @@ public class Ratio<T extends IUnitType, V extends IUnitType> {
 	 *              ratio.
 	 * @return The first unit of the class, with the input having been converted
 	 */
-	@SuppressWarnings("unchecked")
-	public T reverseCompute(V input) {
-//		return (T) valueInReference.createInstance().setValue((input.getValue() * 1d / ratioValue));
-		return null;
+	public double reverseCompute(double input) {
+		return 1 / ratioValue * input;
 	}
 
 	/**

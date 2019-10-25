@@ -1,4 +1,4 @@
-package com.robototes.units.distance;
+package com.robototes.units.area;
 
 import com.robototes.units.IUnit;
 
@@ -7,20 +7,20 @@ import com.robototes.units.IUnit;
  * @author Eli Orona
  * @class A representation of meters in the program.
  */
-public class Meter implements IUnit {
+public class SquareMeter implements IUnit {
 
 	private double value;
-	public static String unit = "Meter";
+	public static String unit = "SquareMeter";
 
-	public Meter(double value) {
+	public SquareMeter(double value) {
 		this.value = 0;
 	}
 
-	public Meter() {
+	public SquareMeter() {
 		this(0);
 	}
 	
-	public Meter(double value, DistanceTypes type) {
+	public SquareMeter(double value, AreaTypes type) {
 		this.value = type.ratio.compute(value);
 	}
 
@@ -36,7 +36,7 @@ public class Meter implements IUnit {
 
 	@Override
 	public IUnit createInstance() {
-		return new Meter(0);
+		return new SquareMeter(0);
 	}
 
 	@Override

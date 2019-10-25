@@ -1,38 +1,33 @@
 package test;
 
-import com.robototes.units.BasicUnit;
-import com.robototes.units.IUnit;
-import com.robototes.units.IUnitType;
-import com.robototes.units.area.AreaUnit;
-import com.robototes.units.area.FeetSq;
+import com.robototes.units.area.AreaTypes;
 import com.robototes.units.distance.DistanceTypes;
 import com.robototes.units.distance.Meter;
 
 public class UnitTest {
 	public static void main(String[] args) {
-//		DistanceUnit inchTest = new Inch(60);
-//		DistanceUnit feetTest = new Feet(5);
 
-//		System.out.println(inchTest);
-//		System.out.println(feetTest);
+		DistanceTypes[] types = DistanceTypes.values();
 
-		AreaUnit feetSqTest = new FeetSq(25);
+		for (DistanceTypes type : types) {
+			System.out.println(type.getRatioToDefault());
+		}
 		
-		IUnitType type = DistanceTypes.CENTIMETER;
+		System.out.println();
 
-//		AreaUnit multiplyTest = (AreaUnit) inchTest.multiply(feetTest);
-//		System.out.println(multiplyTest.toFeetSq());
-//
-//		DistanceUnit divideTest = (DistanceUnit) feetSqTest.divide(feetTest);
-//		System.out.println(divideTest.toFeet());
-//
-//		BasicUnit velocityTest = new BasicUnit(10, "m/s");
-//		BasicUnit secondTest = new BasicUnit(10, "s");
-//
-//		IUnit velTimeMult = velocityTest.multiply(secondTest);
-//		IUnit meterFromBasic = velTimeMult.toUnit(Meter.class);
-//
-//		System.out.println(velTimeMult);
-//		System.out.println(meterFromBasic);
+		AreaTypes[] atypes = AreaTypes.values();
+
+		for (AreaTypes type : atypes) {
+			System.out.println(type.getRatioToDefault());
+		}
+		
+		System.out.println();
+
+		Meter meterFromFeet = new Meter(10, DistanceTypes.FEET);
+		System.out.println(meterFromFeet);
+
+		Meter meterFromKm = new Meter(100, DistanceTypes.KILOMETER);
+		System.out.println(meterFromKm);
+
 	}
 }

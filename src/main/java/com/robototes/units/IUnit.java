@@ -1,7 +1,5 @@
 package com.robototes.units;
 
-import com.robototes.units.distance.DistanceUnit;
-import com.robototes.units.distance.Meter;
 import com.robototes.utils.StringUtils;
 
 /**
@@ -68,16 +66,16 @@ public interface IUnit {
 //	 */
 //	public IUnit divide(IUnit other);
 
-	public default <T extends IUnit> IUnit toUnit(Class<T> newUnit) {
-		try {
-			if (newUnit.newInstance().getTextUnit().equals(this.getTextUnit())) {
-				return newUnit.newInstance().setValue(this.getValue());
-			}
-		} catch (Exception e) {
-
-		}
-		return null;
-
-	}
+//	public default <T extends IUnit> IUnit toUnit(Class<T> newUnit) {
+//		try {
+//			if (newUnit.newInstance().getTextUnit().equals(this.getTextUnit())) {
+//				return newUnit.newInstance().setValue(this.getValue());
+//			}
+//		} catch (Exception e) {
+//
+//		}
+//		return null;
+//
+//	}
 
 }

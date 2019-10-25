@@ -4,18 +4,28 @@ import com.robototes.units.IUnitType;
 import com.robototes.units.Ratio;
 
 public enum DistanceTypes implements IUnitType {
-	DEFAULT("", null), //
-	METER("m", new Ratio<DistanceTypes, DistanceTypes>(1d, DEFAULT, DEFAULT)),
-	CENTIMETER("cm", new Ratio<DistanceTypes, DistanceTypes>(100d, METER, DEFAULT)),
-	INCH("in", new Ratio<DistanceTypes, DistanceTypes>(2.54d, CENTIMETER, DEFAULT)),
-	FEET("ft", new Ratio<DistanceTypes, DistanceTypes>(1d / 12d, INCH, DEFAULT));
+	METER("m"), //
+	CENTIMETER("cm", new Ratio<DistanceTypes, DistanceTypes>(1d / 100d, METER, null)),
+	INCH("in", new Ratio<DistanceTypes, DistanceTypes>(2.54d, CENTIMETER, null)),
+	FEET("ft", new Ratio<DistanceTypes, DistanceTypes>(12d, INCH, null)),
+	YARD("yd", new Ratio<DistanceTypes, DistanceTypes>(3d, FEET, null)),
+	KILOMETER("km", new Ratio<DistanceTypes, DistanceTypes>(1000d, METER, null)),
+	MILLIMETER("mm", new Ratio<DistanceTypes, DistanceTypes>(1d / 10d, CENTIMETER, null));
 
 	public final char[] unit;
-	public final Ratio<DistanceTypes, DistanceTypes> ratio;
+	public Ratio<DistanceTypes, DistanceTypes> ratio;
 
 	DistanceTypes(String unit, Ratio<DistanceTypes, DistanceTypes> ratioToDefault) {
 		this.unit = unit.toCharArray();
-		this.ratio = ratioToDefault;
+		this.ratio = new Ratio<DistanceTypes, DistanceTypes>(//
+				ratioToDefault.getRatioValue() * ratioToDefault.getValueInReference().ratio.getRatioValue(), //
+				ratioToDefault.getValueInReference().ratio.getValueInReference(), //
+				this);
+	}
+
+	DistanceTypes(String unit) {
+		this.unit = unit.toCharArray();
+		this.ratio = new Ratio<DistanceTypes, DistanceTypes>(1, this, this);
 	}
 
 	@Override
@@ -23,15 +33,10 @@ public enum DistanceTypes implements IUnitType {
 		return new String(unit);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public <DistanceTypes> Ratio<DistanceTypes, DistanceTypes> getRatioToDefault() {
-		return (Ratio<DistanceTypes, DistanceTypes>) ratio;
+	public <T extends IUnitType> Ratio<T, T> getRatioToDefault() {
+		return (Ratio<T, T>) ratio;
 	}
-
-//	@Override
-//	public <T extends IUnitType> Ratio<T, T> getRatioToDefault() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }

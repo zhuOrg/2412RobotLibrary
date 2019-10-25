@@ -53,14 +53,14 @@ public class BasicUnit implements IUnit {
 		return new BasicUnit(0, unit);
 	}
 
-	@Override
-	public IUnit multiply(IUnit other) {
-		return new BasicUnit(this.getValue() * other.getValue(), this.getUnit()+"*"+other.getUnit());
-	}
-
-	@Override
-	public IUnit divide(IUnit other) {
-		return new BasicUnit(this.getValue() / other.getValue(), this.getUnit()+"*("+other.getUnit()+")^-1");
-	}
+//	@Override
+//	public IUnit multiply(IUnit other) {
+//		return new BasicUnit(this.getValue() * other.getValue(), this.getUnit()+"*"+other.getUnit());
+//	}
+//
+//	@Override
+//	public IUnit divide(IUnit other) {
+//		return new BasicUnit(this.getValue() / other.getValue(), this.getUnit()+"*("+other.getUnit()+")^-1");
+//	}
 
 }
