@@ -5,7 +5,7 @@ public class PIDConstants {
 	public double k_I = 0;
 	public double k_D = 0;
 	public double k_IDamp = 0;
-	
+
 	public PIDConstants(double k_P) {
 		this.k_P = k_P;
 	}
@@ -59,6 +59,5 @@ public class PIDConstants {
 	public void setK_IDamp(double k_IDamp) {
 		this.k_IDamp = k_IDamp;
 	}
-	
-	
+
 }

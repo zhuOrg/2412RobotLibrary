@@ -29,7 +29,6 @@ public class PIDCalculator {
 		errorSum *= constants.getK_IDamp(); // multiply errorSum after calculating outI to not sink the value of outI.
 		// dampen the value to make sure that error doesnt build up too much over time
 
-
 		double deltaError = (error - pastError) / timestep;
 		double outD = deltaError * constants.getK_D();
 
