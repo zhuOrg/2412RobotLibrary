@@ -1,10 +1,22 @@
 package com.robototes.math;
 
+/**
+ * 
+ * @author OroArmor
+ *
+ */
 public class InterpolatingDouble implements Interpolable<InterpolatingDouble>, InverseInterpolable<InterpolatingDouble>,
 		Comparable<InterpolatingDouble>, Operable<InterpolatingDouble> {
-
+	/**
+	 * Value of the InterpolatingDouble instance
+	 */
 	public Double value;
 
+	/**
+	 * Creates an InterpolatingDouble with a value
+	 * 
+	 * @param value value for the InterpolatingDoubles
+	 */
 	public InterpolatingDouble(Double value) {
 		this.value = value;
 	}

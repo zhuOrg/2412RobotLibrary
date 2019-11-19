@@ -3,15 +3,38 @@ package com.robototes.units;
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.units.UnitTypes.RotationUnits;
 
+/**
+ * A representation of rotations in the program
+ * 
+ * @author OroArmor
+ *
+ */
 public class Rotations implements IUnit<Rotations> {
 
+	/**
+	 * The number of rotations
+	 */
 	public double rotations;
-	public static RotationUnits mainUnit = RotationUnits.DEGREE;
 
+	/**
+	 * The main rotation unit
+	 */
+	public static RotationUnits mainUnit = RotationUnits.ROTATIONS;
+
+	/**
+	 * 
+	 * @param value Creates a Rotation with a number of rotations
+	 */
 	public Rotations(double value) {
 		this.rotations = value;
 	}
 
+	/**
+	 * Creates a Rotation with a given type
+	 * 
+	 * @param value    Value for the type
+	 * @param unitType the type of rotation unit
+	 */
 	public Rotations(double value, RotationUnits unitType) {
 		this(unitType.getRatio().calculateRatio(value));
 	}

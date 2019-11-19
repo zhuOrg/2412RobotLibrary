@@ -3,15 +3,38 @@ package com.robototes.units;
 import com.robototes.units.UnitTypes.DistanceUnits;
 import com.robototes.units.UnitTypes.IUnitType;
 
+/**
+ * A representation of distance in the program. Default unit is the meter.
+ * 
+ * @author OroArmor
+ *
+ */
 public class Distance implements IUnit<Distance> {
 
+	/**
+	 * distance of the unit
+	 */
 	public double distance;
+	/**
+	 * the main unit
+	 */
 	public static DistanceUnits mainUnit = DistanceUnits.METER;
 
+	/**
+	 * Creates a distance with a meter value
+	 * 
+	 * @param value the length of the meter distance
+	 */
 	public Distance(double value) {
 		this.distance = value;
 	}
 
+	/**
+	 * Creates a distance with any unit
+	 * 
+	 * @param value    length of the unit
+	 * @param unitType type of the unit
+	 */
 	public Distance(double value, DistanceUnits unitType) {
 		this(unitType.getRatio().calculateRatio(value));
 	}

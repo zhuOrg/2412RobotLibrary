@@ -1,5 +1,11 @@
 package com.robototes.math;
 
+/**
+ * 
+ * @author OroArmor
+ *
+ * @param <T> The type of the ratio
+ */
 public interface Ratio<T> {
 
 	/**
@@ -21,30 +27,36 @@ public interface Ratio<T> {
 	public String getTo();
 
 	/**
-	 * 
-	 * @param from
-	 * @return
+	 * With the ratio from:to, it calculates the to
+	 * @param from Left side of the ratio
+	 * @return The right side of the ratio
 	 */
 	public double calculateRatio(T from);
 
 	/**
-	 * 
-	 * @param from
-	 * @return
+	 * With the ratio from:to, it calculates the to
+	 * @param from left side of the ratio as a pure double value
+	 * @return right side of the ratio
 	 */
 	public double calculateRatio(double from);
 
 	/**
-	 * 
-	 * @param to
-	 * @return
+	 * With the ratio from:to, it calculates the from
+	 * @param to right side of the ratio
+	 * @return left side of the ratio
 	 */
 	public double calculateReverseRatio(T to);
 
 	/**
-	 * 
-	 * @param to
-	 * @return
+	 * With the ratio from:to, it calculates the from
+	 * @param to right side of the ratio as a pure double value
+	 * @return left side of the ratio
 	 */
 	public double calculateReverseRatio(double to);
+	
+	/**
+	 * 
+	 * @return The inverse of the ratio
+	 */
+	public Ratio<T> getInverseRatio();
 }

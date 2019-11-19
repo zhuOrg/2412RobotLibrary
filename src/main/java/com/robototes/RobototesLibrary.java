@@ -7,7 +7,7 @@ package com.robototes;
  * @version 0.1
  */
 public class RobototesLibrary {
-	private static String version = "0.0.1";
+	private static String version = "0.1";
 
 	/**
 	 * 

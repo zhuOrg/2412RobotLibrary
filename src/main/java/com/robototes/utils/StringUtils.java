@@ -2,6 +2,11 @@ package com.robototes.utils;
 
 import java.text.DecimalFormat;
 
+/**
+ * A bunch of useful string functions
+ * 
+ * @author OroArmor
+ */
 public class StringUtils {
 
 	/**

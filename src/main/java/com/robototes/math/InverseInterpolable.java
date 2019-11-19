@@ -1,5 +1,11 @@
 package com.robototes.math;
 
+/**
+ * 
+ * @author OroArmor
+ *
+ * @param <T> The type to be Interpolated with
+ */
 public interface InverseInterpolable<T> {
 
 	/**
