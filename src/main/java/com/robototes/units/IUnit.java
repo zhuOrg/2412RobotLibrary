@@ -4,8 +4,16 @@ import com.robototes.math.Operable;
 import com.robototes.units.UnitTypes.IUnitType;
 
 public interface IUnit<T extends IUnit<?>> extends Operable<T> {
+	/**
+	 * 
+	 * @return the value of the unit
+	 */
 	public double getValue();
 
+	/**
+	 * 
+	 * @return The label of the unit
+	 */
 	public String getUnit();
 
 	/**

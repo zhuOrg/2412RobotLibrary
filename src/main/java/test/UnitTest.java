@@ -1,12 +1,16 @@
 package test;
 
 import com.robototes.units.Distance;
+import com.robototes.units.InterUnitRatio;
 import com.robototes.units.UnitRatio;
 import com.robototes.units.UnitTypes.DistanceUnits;
 import com.robototes.units.UnitTypes.RotationUnits;
+import com.robototes.units.UnitTypes.TimeUnits;
 
 public class UnitTest {
 	public static void main(String[] args) {
+
+		// Same unit conversions
 		UnitRatio<Distance> feetToMeters = new UnitRatio<Distance>(DistanceUnits.FEET.getConversionValue(),
 				DistanceUnits.FEET, DistanceUnits.METER);
 		System.out.println(feetToMeters);
@@ -21,12 +25,26 @@ public class UnitTest {
 		UnitRatio<Distance> feetToCm = DistanceUnits.FEET.getRatio(DistanceUnits.CENTIMETER);
 		System.out.println(feetToCm);
 
+		// Unit Operations
 		Distance distance1 = new Distance(19, DistanceUnits.INCH);
 		Distance distance2 = new Distance(3, DistanceUnits.FEET);
 		Distance addedDistance = distance1.add(distance2);
 
 		System.out.println(addedDistance.convertTo(DistanceUnits.INCH));
 
-		System.out.println(RotationUnits.RAIDIAN.getRatio());
+		// Inter Unit Ratios
+
+		InterUnitRatio<RotationUnits, DistanceUnits> rotToInches = new InterUnitRatio<RotationUnits, DistanceUnits>(
+				RotationUnits.ROTATIONS, 15, DistanceUnits.INCH);
+
+		InterUnitRatio<DistanceUnits, TimeUnits> inchesToSec = new InterUnitRatio<DistanceUnits, TimeUnits>(
+				DistanceUnits.INCH, 5, TimeUnits.SECOND);
+
+		InterUnitRatio<RotationUnits, TimeUnits> rotToSec = new InterUnitRatio<RotationUnits, TimeUnits>(rotToInches,
+				inchesToSec);
+
+		System.out.println(rotToInches);
+		System.out.println(inchesToSec);
+		System.out.println(rotToSec);
 	}
 }

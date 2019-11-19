@@ -1,6 +1,6 @@
 package test;
 
-import com.robototes.utils.MathUtils;
+import com.robototes.math.MathUtils;
 
 public class UtilsTest {
 

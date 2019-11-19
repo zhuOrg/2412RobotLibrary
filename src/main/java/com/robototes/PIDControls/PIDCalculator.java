@@ -1,6 +1,6 @@
 package com.robototes.PIDControls;
 
-import com.robototes.utils.MathUtils;
+import com.robototes.math.MathUtils;
 
 public class PIDCalculator {
 	public double errorSum;
@@ -15,7 +15,16 @@ public class PIDCalculator {
 		this.constants = constants;
 	}
 
+	public PIDConstants getConstants() {
+		return this.constants;
+	}
+
 	public void setMinMax(double min, double max) {
+
+		if (max < min) {
+			throw new IllegalArgumentException("Min cannot be greater than max");
+		}
+
 		minOutput = min;
 		maxOutput = max;
 	}
