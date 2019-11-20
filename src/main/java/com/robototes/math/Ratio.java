@@ -28,6 +28,7 @@ public interface Ratio<T> {
 
 	/**
 	 * With the ratio from:to, it calculates the to
+	 * 
 	 * @param from Left side of the ratio
 	 * @return The right side of the ratio
 	 */
@@ -35,6 +36,7 @@ public interface Ratio<T> {
 
 	/**
 	 * With the ratio from:to, it calculates the to
+	 * 
 	 * @param from left side of the ratio as a pure double value
 	 * @return right side of the ratio
 	 */
@@ -42,6 +44,7 @@ public interface Ratio<T> {
 
 	/**
 	 * With the ratio from:to, it calculates the from
+	 * 
 	 * @param to right side of the ratio
 	 * @return left side of the ratio
 	 */
@@ -49,11 +52,12 @@ public interface Ratio<T> {
 
 	/**
 	 * With the ratio from:to, it calculates the from
+	 * 
 	 * @param to right side of the ratio as a pure double value
 	 * @return left side of the ratio
 	 */
 	public double calculateReverseRatio(double to);
-	
+
 	/**
 	 * 
 	 * @return The inverse of the ratio

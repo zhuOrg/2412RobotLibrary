@@ -1,5 +1,7 @@
 package com.robototes.units;
 
+import com.robototes.units.UsefulUnits.Voltage;
+
 public class UnitTypes {
 
 	/**
@@ -42,7 +44,9 @@ public class UnitTypes {
 	 *
 	 */
 	public static enum DistanceUnits implements IUnitType<DistanceUnits> {
-		METER(1, "m"), CENTIMETER(1d / 100d, METER, "cm"), INCH(2.54d, CENTIMETER, "in"), FEET(12d, INCH, "ft");
+		METER(1, "m"), CENTIMETER(1d / 100d, METER, "cm"), INCH(2.54d, CENTIMETER, "in"), FEET(12d, INCH, "ft"),
+		YARD(3d, FEET, "yd"), KILOMETER(1000d, METER, "km"), MILE(5280d, FEET, "mile"),
+		MILLIMETER(1d / 10d, CENTIMETER, "mm");
 
 		private double conversionValue;
 		private String unitName;
@@ -73,7 +77,7 @@ public class UnitTypes {
 
 		@Override
 		public UnitRatio<Distance> getRatio(DistanceUnits other) {
-			return new UnitRatio<Distance>(getRatio(), (UnitRatio<Distance>) other.getRatio().getInverseRatio());
+			return new UnitRatio<Distance>(getRatio(), other.getRatio().getInverseRatio());
 		}
 
 		@Override
@@ -90,7 +94,8 @@ public class UnitTypes {
 	 *
 	 */
 	public static enum TimeUnits implements IUnitType<TimeUnits> {
-		SECOND(1, "s"), MILLISECOND(1d / 1000d, SECOND, "ms"), MINUTE(60, SECOND, "min");
+		SECOND(1, "s"), MILLISECOND(1d / 1000d, SECOND, "ms"), MINUTE(60d, SECOND, "min"), HOUR(60d, MINUTE, "hr"),
+		DAY(24d, HOUR, "day");
 
 		private double conversionValue;
 		private String unitName;
@@ -121,7 +126,7 @@ public class UnitTypes {
 
 		@Override
 		public UnitRatio<Time> getRatio(TimeUnits other) {
-			return new UnitRatio<Time>(getRatio(), (UnitRatio<Time>) other.getRatio().getInverseRatio());
+			return new UnitRatio<Time>(getRatio(), other.getRatio().getInverseRatio());
 		}
 
 		@Override
@@ -138,7 +143,7 @@ public class UnitTypes {
 	 *
 	 */
 	public static enum RotationUnits implements IUnitType<RotationUnits> {
-		ROTATIONS(1, "rot"), DEGREE(1d / 360d, ROTATIONS, "deg"), RADIAN(2d * Math.PI, ROTATIONS, "rad");
+		ROTATION(1, "rot"), DEGREE(1d / 360d, ROTATION, "deg"), RADIAN(2d * Math.PI, ROTATION, "rad");
 
 		private double conversionValue;
 		private String unitName;
@@ -169,14 +174,60 @@ public class UnitTypes {
 
 		@Override
 		public UnitRatio<Rotations> getRatio(RotationUnits other) {
-			return new UnitRatio<Rotations>(getRatio(), (UnitRatio<Rotations>) (other.getRatio()).getInverseRatio());
+			return new UnitRatio<Rotations>(getRatio(), (other.getRatio()).getInverseRatio());
 		}
 
 		@Override
 		public RotationUnits getMainUnit() {
-			return ROTATIONS;
+			return ROTATION;
+		}
+	}
+
+	/**
+	 * List of different rotation/angle units
+	 * 
+	 * @author OroArmor
+	 *
+	 */
+	public static enum VoltageUnits implements IUnitType<VoltageUnits> {
+		VOLTS(1, "V"), MILLIVOLTS(1d / 1000d, VOLTS, "mV"), KILOVOLTS(1000d, VOLTS, "kV");
+
+		private double conversionValue;
+		private String unitName;
+
+		VoltageUnits(double conversionValue, String unitName) {
+			this.conversionValue = conversionValue;
+			this.unitName = unitName;
 		}
 
+		VoltageUnits(double conversionValue, VoltageUnits extendRatio, String unitName) {
+			this.conversionValue = conversionValue * extendRatio.conversionValue;
+			this.unitName = unitName;
+		}
+
+		public double getConversionValue() {
+			return conversionValue;
+		}
+
+		@Override
+		public String getUnit() {
+			return unitName;
+		}
+
+		@Override
+		public UnitRatio<Voltage> getRatio() {
+			return new UnitRatio<Voltage>(conversionValue, getUnit(), "V");
+		}
+
+		@Override
+		public UnitRatio<Voltage> getRatio(VoltageUnits other) {
+			return new UnitRatio<Voltage>(getRatio(), (other.getRatio()).getInverseRatio());
+		}
+
+		@Override
+		public VoltageUnits getMainUnit() {
+			return VOLTS;
+		}
 	}
 
 }

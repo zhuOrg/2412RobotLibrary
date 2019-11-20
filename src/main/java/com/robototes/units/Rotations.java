@@ -19,7 +19,7 @@ public class Rotations implements IUnit<Rotations> {
 	/**
 	 * The main rotation unit
 	 */
-	public static RotationUnits mainUnit = RotationUnits.ROTATIONS;
+	public static RotationUnits mainUnit = RotationUnits.ROTATION;
 
 	/**
 	 * 

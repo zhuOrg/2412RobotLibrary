@@ -35,7 +35,7 @@ public class UnitTest {
 		// Inter Unit Ratios
 
 		InterUnitRatio<RotationUnits, DistanceUnits> rotToInches = new InterUnitRatio<RotationUnits, DistanceUnits>(
-				RotationUnits.ROTATIONS, 15, DistanceUnits.INCH);
+				RotationUnits.ROTATION, 15, DistanceUnits.INCH);
 
 		InterUnitRatio<DistanceUnits, TimeUnits> inchesToSec = new InterUnitRatio<DistanceUnits, TimeUnits>(
 				DistanceUnits.INCH, 5, TimeUnits.SECOND);

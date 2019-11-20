@@ -59,8 +59,8 @@ public class UnitRatio<T extends IUnit<?>> implements Ratio<IUnit<?>> {
 	/**
 	 * Creates a ratio between two different ratios
 	 * 
-	 * @param firstRatio  First ratio
-	 * @param ratio2 Second Ratio
+	 * @param firstRatio First ratio
+	 * @param ratio2     Second Ratio
 	 */
 	public UnitRatio(UnitRatio<?> firstRatio, Ratio<IUnit<?>> ratio2) {
 		this.ratio = 1d / (firstRatio.ratio * ratio2.getRatio());
