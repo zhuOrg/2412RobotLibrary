@@ -14,4 +14,6 @@ public interface PIDSubsystem<T extends PIDMotorController<?>, K extends IUnit<K
 	public T[] getMotors();
 
 	public void usePID();
+
+	public void setMotorSpeed(double speed);
 }

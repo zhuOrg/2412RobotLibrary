@@ -10,8 +10,7 @@ public class Gearbox {
 
 	@SuppressWarnings("static-access")
 	public Gearbox(Rotations inputRotations, double gearboxRatio, Rotations outputRotations) {
-		ratio = new InterUnitRatio<RotationUnits, RotationUnits>(Rotations.mainUnit, gearboxRatio,
-				Rotations.mainUnit);
+		ratio = new InterUnitRatio<RotationUnits, RotationUnits>(Rotations.mainUnit, gearboxRatio, Rotations.mainUnit);
 	}
 
 	public Gearbox(Gearbox one, Gearbox two) {

@@ -18,4 +18,6 @@ public interface PIDMotorController<T extends MotorRotations> {
 	public void addRotations(Rotations rotationReference);
 
 	public void addRotations(T rotations);
+
+	public void setSpeed(double speed);
 }

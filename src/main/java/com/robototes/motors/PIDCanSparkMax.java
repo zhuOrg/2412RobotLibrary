@@ -54,10 +54,13 @@ public class PIDCanSparkMax extends CANSparkMax implements PIDMotorController<Sp
 	@Override
 	public double usePIDOutput(Time timestep) {
 		double output = controller.getOutput(setPoint.subtract(getRotations()).getValue(), timestep.getValue());
-
 		this.set(output);
-
 		return output;
+	}
+
+	@Override
+	public void setSpeed(double speed) {
+		this.set(speed);
 	}
 
 }

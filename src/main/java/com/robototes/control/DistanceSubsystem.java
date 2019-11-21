@@ -57,4 +57,11 @@ public class DistanceSubsystem<T extends PIDMotorController<?>> implements PIDSu
 			motor.usePIDOutput();
 		}
 	}
+
+	@Override
+	public void setMotorSpeed(double speed) {
+		for (T motor : motors) {
+			motor.setSpeed(speed);
+		}
+	}
 }
