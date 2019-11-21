@@ -2,6 +2,7 @@ package com.robototes.units;
 
 import com.robototes.units.UnitTypes.DistanceUnits;
 import com.robototes.units.UnitTypes.IUnitType;
+import com.robototes.utils.StringUtils;
 
 /**
  * A representation of distance in the program. Default unit is the meter.
@@ -72,5 +73,9 @@ public class Distance implements IUnit<Distance> {
 	@Override
 	public <K extends IUnitType<K>> double convertTo(K unitType) {
 		return unitType.getRatio().calculateReverseRatio(distance);
+	}
+
+	public String toString() {
+		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
 }

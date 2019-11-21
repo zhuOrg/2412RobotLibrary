@@ -2,6 +2,7 @@ package com.robototes.units;
 
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.units.UnitTypes.TimeUnits;
+import com.robototes.utils.StringUtils;
 
 /**
  * A representation of time in the program
@@ -73,6 +74,10 @@ public class Time implements IUnit<Time> {
 	@Override
 	public <K extends IUnitType<K>> double convertTo(K unitType) {
 		return unitType.getRatio().calculateReverseRatio(time);
+	}
+
+	public String toString() {
+		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
 
 }

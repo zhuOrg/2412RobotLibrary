@@ -2,6 +2,7 @@ package com.robototes.units;
 
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.units.UnitTypes.VoltageUnits;
+import com.robototes.utils.StringUtils;
 
 public class UsefulUnits {
 	/**
@@ -73,6 +74,10 @@ public class UsefulUnits {
 		@Override
 		public <K extends IUnitType<K>> double convertTo(K unitType) {
 			return unitType.getRatio().calculateReverseRatio(this);
+		}
+
+		public String toString() {
+			return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 		}
 
 	}

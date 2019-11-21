@@ -2,6 +2,7 @@ package com.robototes.units;
 
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.units.UnitTypes.RotationUnits;
+import com.robototes.utils.StringUtils;
 
 /**
  * A representation of rotations in the program
@@ -75,4 +76,7 @@ public class Rotations implements IUnit<Rotations> {
 		return unitType.getRatio().calculateReverseRatio(rotations);
 	}
 
+	public String toString() {
+		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	}
 }
