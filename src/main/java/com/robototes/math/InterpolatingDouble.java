@@ -10,7 +10,7 @@ public class InterpolatingDouble implements Interpolable<InterpolatingDouble>, I
 	/**
 	 * Value of the InterpolatingDouble instance
 	 */
-	public Double value;
+	private Double value;
 
 	/**
 	 * Creates an InterpolatingDouble with a value

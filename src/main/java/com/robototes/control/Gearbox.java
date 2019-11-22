@@ -6,9 +6,8 @@ import com.robototes.units.Rotations;
 
 public class Gearbox {
 
-	InterUnitRatio<RotationUnits, RotationUnits> ratio;
+	private InterUnitRatio<RotationUnits, RotationUnits> ratio;
 
-	@SuppressWarnings("static-access")
 	public Gearbox(Rotations inputRotations, double gearboxRatio, Rotations outputRotations) {
 		ratio = new InterUnitRatio<RotationUnits, RotationUnits>(Rotations.mainUnit, gearboxRatio, Rotations.mainUnit);
 	}

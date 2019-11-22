@@ -6,28 +6,28 @@ import com.robototes.units.IUnit;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PIDSetCommand<T extends PIDMotorController<?>, K extends IUnit<K>> extends Command {
-	PIDSubsystem<T, K> subsystem;
-	K set;
-	private double closeness;
+	private PIDSubsystem<T, K> PIDSubsystem;
+	private K setPositionUnit;
+	private double howCloseMustItBe;
 
-	public PIDSetCommand(PIDSubsystem<T, K> subsystem, K unit, double closeness) {
-		this.subsystem = subsystem;
-		this.set = unit;
-		this.closeness = closeness;
+	public PIDSetCommand(PIDSubsystem<T, K> PIDSubsystem, K setPositionUnit, double howCloseMustItBe) {
+		this.PIDSubsystem = PIDSubsystem;
+		this.setPositionUnit = setPositionUnit;
+		this.howCloseMustItBe = howCloseMustItBe;
 	}
 
 	@Override
 	protected void initialize() {
-		subsystem.setReference(set);
+		PIDSubsystem.setReference(setPositionUnit);
 	}
 
 	@Override
 	public void execute() {
-		subsystem.usePID();
+		PIDSubsystem.usePID();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (subsystem.getError().subtract(set).getValue() < closeness);
+		return (PIDSubsystem.getError().subtract(setPositionUnit).getValue() < howCloseMustItBe);
 	}
 }

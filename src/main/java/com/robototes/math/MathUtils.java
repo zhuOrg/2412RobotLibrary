@@ -10,6 +10,12 @@ import static java.lang.Math.*;
 public class MathUtils {
 
 	/**
+	 * Prevents an instance of this class
+	 */
+	private MathUtils() {
+	};
+
+	/**
 	 * Constrains a value between two other values
 	 * 
 	 * @param value    Value to be constrained

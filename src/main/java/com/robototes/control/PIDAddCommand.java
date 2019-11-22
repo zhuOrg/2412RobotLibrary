@@ -1,35 +1,43 @@
 package com.robototes.control;
 
-import com.robototes.motors.PIDMotorController;
 import com.robototes.units.IUnit;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PIDAddCommand<T extends PIDMotorController<?>, K extends IUnit<K>> extends Command {
-	PIDSubsystem<T, K> subsystem;
-	K add;
-	K initial;
-	private double closeness;
+/**
+ * A Command Class that allows for easier use of PIDSubsystems, this command
+ * uses the .addReference() method of PIDSubsyste,
+ * 
+ * @author OroArmor
+ *
+ * @param <T> Unit of the Subsystem
+ */
+public class PIDAddCommand<T extends IUnit<T>> extends Command {
+	private PIDSubsystem<?, T> PIDSubsystem;
+	private T addPositionUnit;
+	private T initialUnitPosition;
+	private double howCloseMustItBe;
 
-	public PIDAddCommand(PIDSubsystem<T, K> subsystem, K unit, double closeness) {
-		this.subsystem = subsystem;
-		this.add = unit;
-		this.closeness = closeness;
+	public PIDAddCommand(PIDSubsystem<?, T> PIDSubsystem, T addPositionUnit, double howCloseMustItBe) {
+		this.PIDSubsystem = PIDSubsystem;
+		this.addPositionUnit = addPositionUnit;
+		this.howCloseMustItBe = howCloseMustItBe;
 	}
 
 	@Override
 	protected void initialize() {
-		initial = subsystem.getError();
-		subsystem.setReference(add);
+		initialUnitPosition = PIDSubsystem.getError();
+		PIDSubsystem.addRefecence(addPositionUnit);
 	}
 
 	@Override
 	public void execute() {
-		subsystem.usePID();
+		PIDSubsystem.usePID();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (subsystem.getError().subtract(initial.add(add)).getValue() < closeness);
+		return (PIDSubsystem.getError().subtract(initialUnitPosition.add(addPositionUnit))
+				.getValue() < howCloseMustItBe);
 	}
 }

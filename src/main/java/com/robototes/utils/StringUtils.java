@@ -10,6 +10,12 @@ import java.text.DecimalFormat;
 public class StringUtils {
 
 	/**
+	 * Prevents an instance of this class
+	 */
+	private StringUtils() {
+	};
+
+	/**
 	 * 
 	 * @param string  The string to be repeated
 	 * @param repeats The number of repeats

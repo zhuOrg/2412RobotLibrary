@@ -11,9 +11,9 @@ import com.robototes.units.UnitTypes.TimeUnits;
 
 public class PIDCanSparkMax extends CANSparkMax implements PIDMotorController<SparkMaxRotations> {
 
-	CANEncoder encoder;
-	PIDController controller;
-	SparkMaxRotations setPoint = new SparkMaxRotations(0);
+	private CANEncoder encoder;
+	private PIDController controller;
+	private SparkMaxRotations setPoint = new SparkMaxRotations(0);
 
 	public PIDCanSparkMax(int deviceID, MotorType type, PIDConstants constants) {
 		super(deviceID, type);

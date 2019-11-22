@@ -7,9 +7,9 @@ import com.robototes.units.UnitTypes.RotationUnits;
 
 public class RotationSubsystem<T extends PIDMotorController<?>> implements PIDSubsystem<T, Rotations> {
 
-	public T[] motors;
-	public InterUnitRatio<RotationUnits, RotationUnits> rotationsToDistance;
-	public Rotations currentReference = new Rotations(0);
+	private T[] motors;
+	private InterUnitRatio<RotationUnits, RotationUnits> rotationsToDistance;
+	private Rotations currentReference = new Rotations(0);
 
 	RotationSubsystem(T[] motors, InterUnitRatio<RotationUnits, RotationUnits> ratio) {
 		this.motors = motors;
