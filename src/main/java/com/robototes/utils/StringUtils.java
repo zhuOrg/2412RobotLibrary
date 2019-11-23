@@ -23,11 +23,9 @@ public class StringUtils {
 	 */
 	public static String repeatString(String string, int repeats) {
 		String returnString = "";
-
 		for (int i = 0; i < repeats; i++) {
 			returnString += string;
 		}
-
 		return returnString;
 	}
 
@@ -38,9 +36,7 @@ public class StringUtils {
 	 * @return A formatted value as a string
 	 */
 	public static String getFormattedValue(double value, int valueLength) {
-
 		DecimalFormat formatter = new DecimalFormat("#." + StringUtils.repeatString("#", valueLength));
-
 		return formatter.format(value);
 	}
 }

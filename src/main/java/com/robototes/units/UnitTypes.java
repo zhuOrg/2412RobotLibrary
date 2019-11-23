@@ -143,7 +143,7 @@ public class UnitTypes {
 	 *
 	 */
 	public static enum RotationUnits implements IUnitType<RotationUnits> {
-		ROTATION(1, "rot"), DEGREE(1d / 360d, ROTATION, "deg"), RADIAN(2d * Math.PI, ROTATION, "rad");
+		ROTATION(1, "rot"), DEGREE(1d / 360d, ROTATION, "deg"), RADIAN(1d / (2d * Math.PI), ROTATION, "rad");
 
 		private double conversionValue;
 		private String unitName;
