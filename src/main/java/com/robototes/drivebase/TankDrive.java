@@ -1,68 +1,176 @@
 package com.robototes.drivebase;
 
-import com.robototes.motors.PIDCanSparkMax;
+import com.robototes.PIDControls.PIDConstants;
+import com.robototes.PIDControls.PIDController;
+import com.robototes.control.DistanceSubsystem;
+import com.robototes.control.JoystickUtils;
+import com.robototes.math.MathUtils;
+import com.robototes.math.Vector;
+import com.robototes.motors.PIDMotorController;
 import com.robototes.units.Distance;
+import com.robototes.units.InterUnitRatio;
 import com.robototes.units.Rotations;
-import com.robototes.units.UnitRatio;
+import com.robototes.units.Time;
+import com.robototes.units.UnitTypes.DistanceUnits;
+import com.robototes.units.UnitTypes.RotationUnits;
+import com.robototes.units.UnitTypes.TimeUnits;
+import com.robototes.utils.ArrayUtils;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class TankDrive implements DriveBase{
+public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T> {
 
-	@Override
-	public void drive(double speed, double turn, Rotations DONOTUSE) {
-		for(int i = 0; i < lMotors.length; i++) {
-			lMotors[i].set(speed-(turn*2));
-			rMotors[i].set(-speed+(turn*2));
+	DistanceSubsystem<T> left;
+	DistanceSubsystem<T> right;
+	T[] motors;
+	// Gryo gryo;
+	PIDController rotationPIDController;
 
-		}
-		
+	ControlMode mode;
+
+	Rotations rotationSetPostition;
+
+	public TankDrive(T[] leftMotors, T[] rightMotors,
+			InterUnitRatio<RotationUnits, DistanceUnits> motorRotationsToDistanceDriven,
+			PIDConstants rotationConstants) {
+		left = new DistanceSubsystem<T>(leftMotors, motorRotationsToDistanceDriven);
+		right = new DistanceSubsystem<T>(rightMotors, motorRotationsToDistanceDriven);
+
+		motors = ArrayUtils.combineArrays(leftMotors, rightMotors);
+
+		rotationPIDController = new PIDController(rotationConstants);
+
+		mode = ControlMode.NONE;
 	}
-	
+
 	@Override
 	public void joystickDrive(Joystick stick) {
-		drive(stick.getY(), stick.getTwist(), null);		
+		setControlMode(ControlMode.MANUAL);
+
+		double[] cubedInputs = JoystickUtils.cubeValues(stick);
+
+		drive(cubedInputs[1], cubedInputs[2]);
 	}
-	
+
+	@Override
+	public void drive(double speed, double angle) {
+		double leftMotorOutput;
+		double rightMotorOutput;
+
+		double maxInput = Math.copySign(Math.max(Math.abs(speed), Math.abs(angle)), speed);
+
+		if (speed >= 0.0) {
+			// First quadrant, else second quadrant
+			if (angle >= 0.0) {
+				leftMotorOutput = maxInput;
+				rightMotorOutput = speed - angle;
+			} else {
+				leftMotorOutput = speed + angle;
+				rightMotorOutput = maxInput;
+			}
+		} else {
+			// Third quadrant, else fourth quadrant
+			if (angle >= 0.0) {
+				leftMotorOutput = speed + angle;
+				rightMotorOutput = maxInput;
+			} else {
+				leftMotorOutput = maxInput;
+				rightMotorOutput = speed - angle;
+			}
+		}
+
+		leftMotorOutput = MathUtils.constrain(leftMotorOutput, -1, 1);
+		rightMotorOutput = MathUtils.constrain(rightMotorOutput, -1, 1);
+
+		left.setMotorSpeed(leftMotorOutput);
+		right.setMotorSpeed(rightMotorOutput);
+	}
+
 	@Override
 	public void stop() {
-		drive(0, 0, null);
-	}
+		setControlMode(ControlMode.NONE);
 
-	@Override
-	public void distanceDrive(Distance distance, double speed, double angle) {
-		while(rotationsToDistance.calculateRatio(lMotors[0].getRotations()) > distance.distance) {
-			drive(speed, angle, null);
+		for (T motor : motors) {
+			motor.setSpeed(0);
 		}
 	}
 
 	@Override
-	public void timeDrive(long time, double speed, double angle, Rotations turn) {
-		long startTime = System.currentTimeMillis();
-		while((System.currentTimeMillis()-startTime) < time) {
-			drive(speed, angle, null);
+	public void addDistanceDrive(Distance distance) {
+		if (mode != ControlMode.DISTANCE) {
+			return;
 		}
-		
+
+		left.addRefecence(distance);
+		right.addRefecence(distance);
 	}
 
-	private boolean isFieldCentric;
-	
-	private Rotations gyro;
-	
-	private PIDCanSparkMax[] lMotors;
-	
-	private PIDCanSparkMax[] rMotors;
-	
-	private UnitRatio rotationsToDistance;
-	
-	public TankDrive(boolean ifc, PIDCanSparkMax[] leftMotors, PIDCanSparkMax[] rightMotors, Rotations gyroVal, UnitRatio rotToDist) {
-		isFieldCentric = ifc;
-		lMotors = leftMotors;
-		rMotors = rightMotors;
-		gyro = gyroVal;
-		rotationsToDistance = rotToDist;
+	@Override
+	public void setSnapToAngle(Rotations rotation) {
+		if (mode != ControlMode.ROTATION) {
+			return;
+		}
+		rotationSetPostition = rotation;
 	}
 
+	@Override
+	public T[] getMotors() {
+		return motors;
+	}
 
-	
+	@Override
+	public void setVector(Vector path) {
+		if (mode != ControlMode.VECTOR) {
+			return;
+		}
+		mode = ControlMode.DISTANCE;
+		addDistanceDrive(new Distance(path.length));
+		mode = ControlMode.ROTATION;
+		addAngle(new Rotations(path.angle, RotationUnits.RADIAN));
+	}
+
+	@Override
+	public void setControlMode(ControlMode mode) {
+		this.mode = mode;
+	}
+
+	@Override
+	public ControlMode getControlMode() {
+		return mode;
+	}
+
+	@Override
+	public void useDistancePID() {
+		left.usePID();
+		right.usePID();
+	}
+
+	@Override
+	public void useAnglePID() {
+		double input = rotationSetPostition.subtract(getHeading()).getValue();
+		double output = rotationPIDController.getOutput(input, new Time(5, TimeUnits.MILLISECOND).getValue());
+
+		for (T motor : motors) {
+			motor.setSpeed(output);
+		}
+	}
+
+	@Override
+	public Distance getTotalDistance() {
+		return left.getError().add(right.getError()).divide(new Distance(2));
+	}
+
+	@Override
+	public Rotations getHeading() {
+		return new Rotations(0);
+	}
+
+	@Override
+	public void addAngle(Rotations rotation) {
+		if (mode != ControlMode.ROTATION) {
+			return;
+		}
+		rotationSetPostition = rotationSetPostition.add(rotation);
+	}
+
 }

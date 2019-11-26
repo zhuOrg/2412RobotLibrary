@@ -13,7 +13,7 @@ public class DistanceSubsystem<T extends PIDMotorController<?>> implements PIDSu
 	private InterUnitRatio<RotationUnits, DistanceUnits> rotationsToDistance;
 	private Distance currentReference = new Distance(0);
 
-	DistanceSubsystem(T[] motors, InterUnitRatio<RotationUnits, DistanceUnits> ratio) {
+	public DistanceSubsystem(T[] motors, InterUnitRatio<RotationUnits, DistanceUnits> ratio) {
 		this.motors = motors;
 		this.rotationsToDistance = ratio;
 	}
