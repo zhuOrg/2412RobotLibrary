@@ -38,7 +38,7 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 		left = new DistanceSubsystem<T>(leftMotors, motorRotationsToDistanceDriven);
 		right = new DistanceSubsystem<T>(rightMotors, motorRotationsToDistanceDriven);
 
-		motors = ArrayUtils.combineArrays(leftMotors, rightMotors);
+		motors = ArrayUtils.stackArrays(leftMotors, rightMotors);
 
 		rotationPIDController = new PIDController(rotationConstants);
 
