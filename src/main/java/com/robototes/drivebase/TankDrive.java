@@ -7,6 +7,7 @@ import com.robototes.control.JoystickUtils;
 import com.robototes.math.MathUtils;
 import com.robototes.math.Vector;
 import com.robototes.motors.PIDMotorController;
+import com.robototes.sensors.Gyro;
 import com.robototes.units.Distance;
 import com.robototes.units.InterUnitRatio;
 import com.robototes.units.Rotations;
@@ -29,16 +30,19 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 	ControlMode mode;
 
 	Rotations rotationSetPostition;
+	Gyro gyro;
 
 	public TankDrive(T[] leftMotors, T[] rightMotors,
-			InterUnitRatio<RotationUnits, DistanceUnits> motorRotationsToDistanceDriven,
-			PIDConstants rotationConstants) {
+			InterUnitRatio<RotationUnits, DistanceUnits> motorRotationsToDistanceDriven, PIDConstants rotationConstants,
+			Gyro gyro) {
 		left = new DistanceSubsystem<T>(leftMotors, motorRotationsToDistanceDriven);
 		right = new DistanceSubsystem<T>(rightMotors, motorRotationsToDistanceDriven);
 
 		motors = ArrayUtils.combineArrays(leftMotors, rightMotors);
 
 		rotationPIDController = new PIDController(rotationConstants);
+
+		this.gyro = gyro;
 
 		mode = ControlMode.NONE;
 	}
@@ -131,7 +135,13 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 
 	@Override
 	public void setControlMode(ControlMode mode) {
-		this.mode = mode;
+		if (this.mode == ControlMode.MANUAL) {
+			if (mode == ControlMode.NONE) {
+				this.mode = mode;
+			}
+		} else {
+			this.mode = mode;
+		}
 	}
 
 	@Override
@@ -141,12 +151,18 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 
 	@Override
 	public void useDistancePID() {
+		if (this.mode != ControlMode.DISTANCE) {
+			return;
+		}
 		left.usePID();
 		right.usePID();
 	}
 
 	@Override
 	public void useAnglePID() {
+		if (this.mode == ControlMode.ROTATION) {
+			return;
+		}
 		double input = rotationSetPostition.subtract(getHeading()).getValue();
 		double output = rotationPIDController.getOutput(input, new Time(5, TimeUnits.MILLISECOND).getValue());
 
@@ -162,7 +178,7 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 
 	@Override
 	public Rotations getHeading() {
-		return new Rotations(0);
+		return gyro.getRotations();
 	}
 
 	@Override

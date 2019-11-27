@@ -48,6 +48,7 @@ public class DefaultUnit implements IUnit<DefaultUnit> {
 		return unitType.getRatio().calculateRatio(value);
 	}
 
+	@Override
 	public String toString() {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}

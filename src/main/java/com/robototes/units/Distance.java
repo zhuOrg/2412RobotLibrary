@@ -75,6 +75,7 @@ public class Distance implements IUnit<Distance> {
 		return unitType.getRatio().calculateReverseRatio(distance);
 	}
 
+	@Override
 	public String toString() {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}

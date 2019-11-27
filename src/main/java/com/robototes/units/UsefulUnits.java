@@ -76,6 +76,7 @@ public class UsefulUnits {
 			return unitType.getRatio().calculateReverseRatio(this);
 		}
 
+		@Override
 		public String toString() {
 			return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 		}

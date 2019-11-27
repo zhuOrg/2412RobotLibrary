@@ -14,20 +14,30 @@ public class PIDSetCommand<T extends PIDMotorController<?>, K extends IUnit<K>> 
 		this.PIDSubsystem = PIDSubsystem;
 		this.setPositionUnit = setPositionUnit;
 		this.howCloseMustItBe = howCloseMustItBe;
+		System.out.println("created");
 	}
 
 	@Override
 	protected void initialize() {
+		System.out.println("init");
 		PIDSubsystem.setReference(setPositionUnit);
 	}
 
 	@Override
 	public void execute() {
+		System.out.println("execute");
 		PIDSubsystem.usePID();
 	}
 
 	@Override
+	public void end() {
+		PIDSubsystem.setMotorSpeed(0);
+	}
+
+	@Override
 	protected boolean isFinished() {
-		return (PIDSubsystem.getError().subtract(setPositionUnit).getValue() < howCloseMustItBe);
+		K error = PIDSubsystem.getError();
+		boolean finished = (Math.abs(error.subtract(setPositionUnit).getValue()) < howCloseMustItBe);
+		return finished;
 	}
 }

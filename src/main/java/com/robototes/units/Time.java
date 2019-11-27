@@ -76,6 +76,7 @@ public class Time implements IUnit<Time> {
 		return unitType.getRatio().calculateReverseRatio(time);
 	}
 
+	@Override
 	public String toString() {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}

@@ -76,6 +76,7 @@ public class Rotations implements IUnit<Rotations> {
 		return unitType.getRatio().calculateReverseRatio(rotations);
 	}
 
+	@Override
 	public String toString() {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
