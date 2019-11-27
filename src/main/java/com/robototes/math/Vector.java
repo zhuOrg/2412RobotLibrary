@@ -100,7 +100,7 @@ public class Vector {
 	 * @return The difference of two vectors
 	 */
 	public Vector sub(Vector other) {
-		return add(other.x, other.y);
+		return sub(other.x, other.y);
 	}
 
 	/**
@@ -133,10 +133,10 @@ public class Vector {
 	 * The dot product of two vectors
 	 * 
 	 * @param other The vector to calculated the dot product with
-	 * @return A new vector representing the dot product
+	 * @return A double representing the dot product
 	 */
-	public Vector dot(Vector other) {
-		return new Vector(this.x * other.x, this.y * other.y);
+	public double dot(Vector other) {
+		return this.x * other.x + this.y * other.y;
 	}
 
 	/**
@@ -148,4 +148,24 @@ public class Vector {
 	public double angleBetween(Vector other) {
 		return atan2(other.y, other.x) - atan2(this.y, this.x);
 	}
+
+	@Override
+	public boolean equals(Object other) {
+
+		if (!(other instanceof Vector)) {
+			return false;
+		}
+
+		return equals((Vector) other, MathUtils.EPSILON);
+	}
+
+	public boolean equals(Vector other, double epsilon) {
+		return MathUtils.epsilonEquals(x, other.x, epsilon) && MathUtils.epsilonEquals(y, other.y, epsilon);
+	}
+
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
+	}
+
 }

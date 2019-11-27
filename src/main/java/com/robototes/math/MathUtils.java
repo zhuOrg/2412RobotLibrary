@@ -9,6 +9,8 @@ import static java.lang.Math.*;
  */
 public class MathUtils {
 
+	public static double EPSILON = 1e-9;
+	
 	/**
 	 * Prevents an instance of this class
 	 */
@@ -109,5 +111,9 @@ public class MathUtils {
 			total += pow(value, 2);
 		}
 		return sqrt(total);
+	}
+	
+	public static boolean epsilonEquals(double a, double b, double ep) {
+		return abs(a-b) < ep;
 	}
 }

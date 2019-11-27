@@ -59,4 +59,13 @@ public class InterpolatingDouble implements Interpolable<InterpolatingDouble>, I
 	public InterpolatingDouble divide(InterpolatingDouble other) {
 		return new InterpolatingDouble(this.value / other.value);
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof InterpolatingDouble)) {
+			return false;
+		}
+
+		return MathUtils.epsilonEquals(value, ((InterpolatingDouble) obj).value, MathUtils.EPSILON);
+	}
 }

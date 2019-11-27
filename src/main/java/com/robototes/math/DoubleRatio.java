@@ -44,7 +44,7 @@ public class DoubleRatio implements Ratio<Double> {
 	 * @param secondRatio Second Ratio
 	 */
 	public DoubleRatio(Ratio<?> firstRatio, Ratio<?> secondRatio) {
-		this.ratio = 1d / (firstRatio.getRatio() * secondRatio.getRatio());
+		this.ratio = (firstRatio.getRatio() * secondRatio.getRatio());
 		this.from = firstRatio.getFrom();
 		this.to = secondRatio.getTo();
 	}
@@ -86,11 +86,23 @@ public class DoubleRatio implements Ratio<Double> {
 
 	@Override
 	public String toString() {
-		return StringUtils.getFormattedValue(getRatio(), 5) + getFrom() + ":1" + getTo();
+		return StringUtils.getFormattedValue(getRatio(), 5) + getFrom() + ":" + getTo();
 	}
 
 	@Override
 	public Ratio<Double> getInverseRatio() {
 		return new DoubleRatio(1d / ratio, to, from);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof DoubleRatio)) {
+			return false;
+		}
+
+		DoubleRatio other = (DoubleRatio) obj;
+
+		return MathUtils.epsilonEquals(ratio, other.ratio, MathUtils.EPSILON) && from.equals(other.getFrom())
+				&& to.equals(other.getTo());
 	}
 }
