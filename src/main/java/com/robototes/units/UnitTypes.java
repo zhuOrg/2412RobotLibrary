@@ -44,8 +44,37 @@ public class UnitTypes {
 	 *
 	 */
 	public static enum DistanceUnits implements IUnitType<DistanceUnits> {
-		METER(1, "m"), CENTIMETER(1d / 100d, METER, "cm"), INCH(2.54d, CENTIMETER, "in"), FEET(12d, INCH, "ft"),
-		YARD(3d, FEET, "yd"), KILOMETER(1000d, METER, "km"), MILE(5280d, FEET, "mile"),
+		/**
+		 * Meters
+		 */
+		METER(1, "m"),
+		/**
+		 * Centimeters, 100cm = 1m
+		 */
+		CENTIMETER(1d / 100d, METER, "cm"),
+		/**
+		 * Inch, 39.3700787in = 1m
+		 */
+		INCH(2.54d, CENTIMETER, "in"),
+		/**
+		 * Feet, 3.2808399ft = 1m
+		 */
+		FEET(12d, INCH, "ft"),
+		/**
+		 * Yard, 1.0936133yd = 1m
+		 */
+		YARD(3d, FEET, "yd"),
+		/**
+		 * Kilometer, 1km = 1000m
+		 */
+		KILOMETER(1000d, METER, "km"),
+		/**
+		 * Mile, 1mile = 1609.344m
+		 */
+		MILE(5280d, FEET, "mile"),
+		/**
+		 * Millimeter, 1000mm = 1m
+		 */
 		MILLIMETER(1d / 10d, CENTIMETER, "mm");
 
 		private double conversionValue;
@@ -94,7 +123,25 @@ public class UnitTypes {
 	 *
 	 */
 	public static enum TimeUnits implements IUnitType<TimeUnits> {
-		SECOND(1, "s"), MILLISECOND(1d / 1000d, SECOND, "ms"), MINUTE(60d, SECOND, "min"), HOUR(60d, MINUTE, "hr"),
+		/**
+		 * Seconds
+		 */
+		SECOND(1, "s"),
+		/**
+		 * Milliseconds, 1000ms = 1s
+		 */
+		MILLISECOND(1d / 1000d, SECOND, "ms"),
+		/**
+		 * Minutes, 1min = 60 sec
+		 */
+		MINUTE(60d, SECOND, "min"),
+		/**
+		 * Hours, 1hr = 3600 sec
+		 */
+		HOUR(60d, MINUTE, "hr"),
+		/**
+		 * Days, 1 day = 86400 sec
+		 */
 		DAY(24d, HOUR, "day");
 
 		private double conversionValue;
@@ -143,7 +190,18 @@ public class UnitTypes {
 	 *
 	 */
 	public static enum RotationUnits implements IUnitType<RotationUnits> {
-		ROTATION(1, "rot"), DEGREE(1d / 360d, ROTATION, "deg"), RADIAN(1d / (2d * Math.PI), ROTATION, "rad");
+		/**
+		 * Rotations
+		 */
+		ROTATION(1, "rot"),
+		/**
+		 * Degrees, 360deg = 1rot
+		 */
+		DEGREE(1d / 360d, ROTATION, "deg"),
+		/**
+		 * Radians, 2pi rad = 1 rot
+		 */
+		RADIAN(1d / (2d * Math.PI), ROTATION, "rad");
 
 		private double conversionValue;
 		private String unitName;
@@ -184,13 +242,24 @@ public class UnitTypes {
 	}
 
 	/**
-	 * List of different rotation/angle units
+	 * List of different voltage units
 	 * 
 	 * @author OroArmor
 	 *
 	 */
 	public static enum VoltageUnits implements IUnitType<VoltageUnits> {
-		VOLTS(1, "V"), MILLIVOLTS(1d / 1000d, VOLTS, "mV"), KILOVOLTS(1000d, VOLTS, "kV");
+		/**
+		 * Volts
+		 */
+		VOLTS(1, "V"),
+		/**
+		 * Millivolts, 1000mV = 1V
+		 */
+		MILLIVOLTS(1d / 1000d, VOLTS, "mV"),
+		/**
+		 * Kilovolts, 1000kV = 1V
+		 */
+		KILOVOLTS(1000d, VOLTS, "kV");
 
 		private double conversionValue;
 		private String unitName;
