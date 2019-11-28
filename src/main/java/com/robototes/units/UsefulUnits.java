@@ -1,5 +1,6 @@
 package com.robototes.units;
 
+import com.robototes.math.MathUtils;
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.units.UnitTypes.VoltageUnits;
 import com.robototes.utils.StringUtils;
@@ -81,5 +82,16 @@ public class UsefulUnits {
 			return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 		}
 
+		public boolean equals(Object obj) {
+			if (!(obj instanceof Voltage)) {
+				return false;
+			}
+			return equals((Voltage) obj);
+		}
+
+		public boolean equals(Voltage other) {
+			return MathUtils.epsilonEquals(this.getValue(), other.getValue(), 0.00001);
+			// Epsilion is too big with conversion values
+		}
 	}
 }

@@ -1,5 +1,6 @@
 package com.robototes.units;
 
+import com.robototes.math.MathUtils;
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.utils.StringUtils;
 
@@ -45,12 +46,25 @@ public class DefaultUnit implements IUnit<DefaultUnit> {
 
 	@Override
 	public <K extends IUnitType<K>> double convertTo(K unitType) {
-		return unitType.getRatio().calculateRatio(value);
+		return unitType.getRatio().calculateReverseRatio(value);
 	}
 
 	@Override
 	public String toString() {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof IUnit<?>)) {
+			return false;
+		}
+		return equals((IUnit<?>) obj);
+	}
+
+	public boolean equals(IUnit<?> other) {
+		return MathUtils.epsilonEquals(value, other.getValue(), 0.00001) && this.unit.equals(other.getUnit());
+		// Epsilion is too big with conversion values
 	}
 
 }

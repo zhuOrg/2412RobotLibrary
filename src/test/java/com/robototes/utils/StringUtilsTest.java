@@ -16,7 +16,7 @@ public class StringUtilsTest {
 	@Test
 	public void testGetFormattedValue() {
 		double value = Math.PI;
-		
+
 		assertEquals("Formatting a value to a certain length", StringUtils.getFormattedValue(value, 5), "3.14159");
 	}
 

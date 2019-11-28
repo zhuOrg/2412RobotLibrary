@@ -1,5 +1,6 @@
 package com.robototes.units;
 
+import com.robototes.math.MathUtils;
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.units.UnitTypes.TimeUnits;
 import com.robototes.utils.StringUtils;
@@ -79,6 +80,18 @@ public class Time implements IUnit<Time> {
 	@Override
 	public String toString() {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Time)) {
+			return false;
+		}
+		return equals((Time) obj);
+	}
+
+	public boolean equals(Time other) {
+		return MathUtils.epsilonEquals(this.getValue(), other.getValue(), 0.00001);
+		// Epsilion is too big with conversion values
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.robototes.units;
 
+import com.robototes.math.MathUtils;
 import com.robototes.units.UnitTypes.DistanceUnits;
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.utils.StringUtils;
@@ -78,5 +79,17 @@ public class Distance implements IUnit<Distance> {
 	@Override
 	public String toString() {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Distance)) {
+			return false;
+		}
+		return equals((Distance) obj);
+	}
+
+	public boolean equals(Distance other) {
+		return MathUtils.epsilonEquals(distance, other.distance, 0.00001); // Epsilion is too big with conversion values
 	}
 }

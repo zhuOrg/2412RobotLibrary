@@ -1,5 +1,6 @@
 package com.robototes.units;
 
+import com.robototes.math.MathUtils;
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.units.UnitTypes.RotationUnits;
 import com.robototes.utils.StringUtils;
@@ -79,5 +80,17 @@ public class Rotations implements IUnit<Rotations> {
 	@Override
 	public String toString() {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Rotations)) {
+			return false;
+		}
+		return equals((Rotations) obj);
+	}
+
+	public boolean equals(Rotations other) {
+		return MathUtils.epsilonEquals(this.getValue(), other.getValue(), 0.00001);
+		// Epsilion is too big with conversion values
 	}
 }
