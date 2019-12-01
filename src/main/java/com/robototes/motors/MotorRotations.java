@@ -2,6 +2,13 @@ package com.robototes.motors;
 
 import com.robototes.units.Rotations;
 
+/**
+ * An abstract class all types of motor rotations extend to allow for better
+ * ratios
+ * 
+ * @author OroArmor
+ *
+ */
 public abstract class MotorRotations extends Rotations {
 	public MotorRotations(double value) {
 		super(value);
@@ -11,7 +18,16 @@ public abstract class MotorRotations extends Rotations {
 		super(rotations.getValue());
 	}
 
+	/**
+	 * Rotations for CANSparkMax
+	 * 
+	 * @author OroArmor
+	 *
+	 */
 	public static class SparkMaxRotations extends MotorRotations {
+
+		public String mainUnit = "SProt";
+
 		public SparkMaxRotations(double value) {
 			super(value);
 		}

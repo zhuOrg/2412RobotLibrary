@@ -9,6 +9,11 @@ import com.robototes.units.Rotations;
 import com.robototes.units.Time;
 import com.robototes.units.UnitTypes.TimeUnits;
 
+/**
+ * A wrapper class for CANSparkMax by Revrobotics. Allows for PID Control of the motor
+ * @author OroArmor
+ *
+ */
 public class PIDCanSparkMax extends CANSparkMax implements PIDMotorController<SparkMaxRotations> {
 
 	private CANEncoder encoder;

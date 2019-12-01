@@ -6,6 +6,12 @@ import com.robototes.units.UnitTypes.RotationUnits;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI.Port;
 
+/**
+ * An extension of ADXRS450_Gyro so that new programmers can do it easier.
+ * 
+ * @author OroArmor
+ *
+ */
 public class Gyro extends ADXRS450_Gyro {
 
 	public Gyro() {
@@ -16,6 +22,11 @@ public class Gyro extends ADXRS450_Gyro {
 		super(port);
 	}
 
+	/**
+	 * Converts the angle to a rotation, constrained between 0 and 1
+	 * 
+	 * @return The rotations of the gryo
+	 */
 	public Rotations getRotations() {
 		return new Rotations(this.getAngle() % 360, RotationUnits.DEGREE);
 	}

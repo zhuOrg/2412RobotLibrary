@@ -8,6 +8,13 @@ import com.robototes.units.UnitTypes;
 import com.robototes.units.UnitTypes.DistanceUnits;
 import com.robototes.units.UnitTypes.RotationUnits;
 
+/**
+ * A subsystem with PID control for distance
+ * 
+ * @author OroArmor
+ *
+ * @param <T> Motors used
+ */
 public class DistanceSubsystem<T extends PIDMotorController<?>> implements PIDSubsystem<T, Distance> {
 
 	private T[] motors;

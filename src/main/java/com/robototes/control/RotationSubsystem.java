@@ -5,6 +5,13 @@ import com.robototes.units.InterUnitRatio;
 import com.robototes.units.Rotations;
 import com.robototes.units.UnitTypes.RotationUnits;
 
+/**
+ * A subsystem that rotates with PID Control.
+ * 
+ * @author OroArmor
+ *
+ * @param <T> Motors used
+ */
 public class RotationSubsystem<T extends PIDMotorController<?>> implements PIDSubsystem<T, Rotations> {
 
 	private T[] motors;

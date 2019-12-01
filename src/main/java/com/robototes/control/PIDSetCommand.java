@@ -1,16 +1,22 @@
 package com.robototes.control;
 
-import com.robototes.motors.PIDMotorController;
 import com.robototes.units.IUnit;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PIDSetCommand<T extends PIDMotorController<?>, K extends IUnit<K>> extends Command {
-	private PIDSubsystem<T, K> PIDSubsystem;
+/**
+ * A set command for PID subsytems
+ * 
+ * @author OroArmor
+ *
+ * @param <K> Unit type of the subsystem
+ */
+public class PIDSetCommand<K extends IUnit<K>> extends Command {
+	private PIDSubsystem<?, K> PIDSubsystem;
 	private K setPositionUnit;
 	private double howCloseMustItBe;
 
-	public PIDSetCommand(PIDSubsystem<T, K> PIDSubsystem, K setPositionUnit, double howCloseMustItBe) {
+	public PIDSetCommand(PIDSubsystem<?, K> PIDSubsystem, K setPositionUnit, double howCloseMustItBe) {
 		this.PIDSubsystem = PIDSubsystem;
 		this.setPositionUnit = setPositionUnit;
 		this.howCloseMustItBe = howCloseMustItBe;
