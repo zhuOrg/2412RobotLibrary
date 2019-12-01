@@ -1,5 +1,6 @@
 package com.robototes.units;
 
+import com.robototes.math.MathUtils;
 import com.robototes.math.Ratio;
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.utils.StringUtils;
@@ -99,5 +100,15 @@ public class InterUnitRatio<K extends IUnitType<?>, V extends IUnitType<?>> impl
 	@Override
 	public Ratio<IUnit<?>> getInverseRatio() {
 		return new InterUnitRatio<V, K>(toType, 1d / ratio, fromType);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof InterUnitRatio<?, ?>)) {
+			return false;
+		}
+		InterUnitRatio<?, ?> other = (InterUnitRatio<?, ?>) obj;
+		return MathUtils.epsilonEquals(ratio, other.getRatio(), MathUtils.EPSILON) && from.equals(other.getFrom())
+				&& to.equals(other.getTo());
 	}
 }

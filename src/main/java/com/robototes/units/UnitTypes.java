@@ -2,6 +2,12 @@ package com.robototes.units;
 
 import com.robototes.units.UsefulUnits.Voltage;
 
+/**
+ * All the unit types are housed within this class
+ * 
+ * @author OroArmor
+ *
+ */
 public class UnitTypes {
 
 	/**
@@ -106,7 +112,7 @@ public class UnitTypes {
 
 		@Override
 		public UnitRatio<Distance> getRatio(DistanceUnits other) {
-			return new UnitRatio<Distance>(getRatio(), other.getRatio().getInverseRatio());
+			return new UnitRatio<Distance>(getRatio(), (UnitRatio<?>) other.getRatio().getInverseRatio());
 		}
 
 		@Override
@@ -173,7 +179,7 @@ public class UnitTypes {
 
 		@Override
 		public UnitRatio<Time> getRatio(TimeUnits other) {
-			return new UnitRatio<Time>(getRatio(), other.getRatio().getInverseRatio());
+			return new UnitRatio<Time>(getRatio(), (UnitRatio<?>) other.getRatio().getInverseRatio());
 		}
 
 		@Override
@@ -232,7 +238,7 @@ public class UnitTypes {
 
 		@Override
 		public UnitRatio<Rotations> getRatio(RotationUnits other) {
-			return new UnitRatio<Rotations>(getRatio(), (other.getRatio()).getInverseRatio());
+			return new UnitRatio<Rotations>(getRatio(), (UnitRatio<?>) (other.getRatio()).getInverseRatio());
 		}
 
 		@Override
@@ -290,7 +296,7 @@ public class UnitTypes {
 
 		@Override
 		public UnitRatio<Voltage> getRatio(VoltageUnits other) {
-			return new UnitRatio<Voltage>(getRatio(), (other.getRatio()).getInverseRatio());
+			return new UnitRatio<Voltage>(getRatio(), (UnitRatio<?>) (other.getRatio()).getInverseRatio());
 		}
 
 		@Override

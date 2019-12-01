@@ -1,5 +1,6 @@
 package com.robototes.units;
 
+import com.robototes.math.MathUtils;
 import com.robototes.math.Ratio;
 import com.robototes.units.UnitTypes.IUnitType;
 import com.robototes.utils.StringUtils;
@@ -62,8 +63,8 @@ public class UnitRatio<T extends IUnit<?>> implements Ratio<IUnit<?>> {
 	 * @param firstRatio First ratio
 	 * @param ratio2     Second Ratio
 	 */
-	public UnitRatio(UnitRatio<?> firstRatio, Ratio<IUnit<?>> ratio2) {
-		this.ratio = 1d / (firstRatio.ratio * ratio2.getRatio());
+	public UnitRatio(UnitRatio<?> firstRatio, UnitRatio<?> ratio2) {
+		this.ratio = (firstRatio.ratio * ratio2.getRatio());
 		this.from = firstRatio.from;
 		this.to = ratio2.getTo();
 	}
@@ -105,11 +106,21 @@ public class UnitRatio<T extends IUnit<?>> implements Ratio<IUnit<?>> {
 
 	@Override
 	public String toString() {
-		return StringUtils.getFormattedValue(getRatio(), 5) + getFrom() + ":1" + getTo();
+		return StringUtils.getFormattedValue(1d / getRatio(), 5) + getFrom() + ":1" + getTo();
 	}
 
 	@Override
 	public Ratio<IUnit<?>> getInverseRatio() {
 		return new UnitRatio<T>(1d / ratio, to, from);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof UnitRatio<?>)) {
+			return false;
+		}
+		UnitRatio<?> other = (UnitRatio<?>) obj;
+		return MathUtils.epsilonEquals(ratio, other.getRatio(), MathUtils.EPSILON) && from.equals(other.getFrom())
+				&& to.equals(other.getTo());
 	}
 }
