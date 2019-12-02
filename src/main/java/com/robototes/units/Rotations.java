@@ -82,6 +82,7 @@ public class Rotations implements IUnit<Rotations> {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Rotations)) {
 			return false;

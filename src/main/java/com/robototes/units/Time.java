@@ -82,6 +82,7 @@ public class Time implements IUnit<Time> {
 		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Time)) {
 			return false;
