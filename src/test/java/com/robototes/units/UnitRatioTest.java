@@ -12,6 +12,31 @@ public class UnitRatioTest {
 	UnitRatio<Distance> cmToMeter = new UnitRatio<Distance>(1d / 100d, DistanceUnits.CENTIMETER, DistanceUnits.METER);
 
 	@Test
+	public void testCalculateRatio() {
+		assertEquals("Double ratio calculation", cmToMeter.calculateRatio(5), 0.05, MathUtils.EPSILON);
+		assertEquals("Unit ratio calculation", cmToMeter.calculateRatio(new Distance(5)), 0.05, MathUtils.EPSILON);
+	}
+
+	@Test
+	public void testCalculateReverseRatio() {
+		assertEquals("Double reverse ratio calculation", cmToMeter.calculateReverseRatio(5), 500, MathUtils.EPSILON);
+		assertEquals("Unit reverse ratio calculation", cmToMeter.calculateReverseRatio(new Distance(5)), 500,
+				MathUtils.EPSILON);
+	}
+
+	@Test
+	public void testGetInverseRatio() {
+		UnitRatio<Distance> meterToCm = new UnitRatio<Distance>(100d, DistanceUnits.METER, DistanceUnits.CENTIMETER);
+		assertEquals("Inverse Ratio", meterToCm, cmToMeter.getInverseRatio());
+	}
+
+	@Test
+	public void testToString() {
+		assertEquals("toString", cmToMeter.toString(), "100cm:1m");
+
+	}
+
+	@Test
 	public void testUnitRatio() {
 		assertEquals("Check ratio is correct", cmToMeter.getRatio(), 0.01, MathUtils.EPSILON);
 		assertEquals("Check to is correct", cmToMeter.getTo(), DistanceUnits.METER.getUnit());
@@ -27,31 +52,6 @@ public class UnitRatioTest {
 
 		assertEquals("Combo ratio is correct", mmToMeter, new UnitRatio<Distance>(mmToCm, cmToMeter));
 
-	}
-
-	@Test
-	public void testCalculateRatio() {
-		assertEquals("Double ratio calculation", cmToMeter.calculateRatio(5), 0.05, MathUtils.EPSILON);
-		assertEquals("Unit ratio calculation", cmToMeter.calculateRatio(new Distance(5)), 0.05, MathUtils.EPSILON);
-	}
-
-	@Test
-	public void testCalculateReverseRatio() {
-		assertEquals("Double reverse ratio calculation", cmToMeter.calculateReverseRatio(5), 500, MathUtils.EPSILON);
-		assertEquals("Unit reverse ratio calculation", cmToMeter.calculateReverseRatio(new Distance(5)), 500,
-				MathUtils.EPSILON);
-	}
-
-	@Test
-	public void testToString() {
-		assertEquals("toString", cmToMeter.toString(), "100cm:1m");
-
-	}
-
-	@Test
-	public void testGetInverseRatio() {
-		UnitRatio<Distance> meterToCm = new UnitRatio<Distance>(100d, DistanceUnits.METER, DistanceUnits.CENTIMETER);
-		assertEquals("Inverse Ratio", meterToCm, cmToMeter.getInverseRatio());
 	}
 
 }

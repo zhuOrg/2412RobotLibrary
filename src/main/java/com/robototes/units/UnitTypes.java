@@ -11,39 +11,6 @@ import com.robototes.units.UsefulUnits.Voltage;
 public class UnitTypes {
 
 	/**
-	 * 
-	 * @author OroArmor
-	 *
-	 * @param <T> The Unit type
-	 */
-	public interface IUnitType<T extends IUnitType<?>> {
-		/**
-		 * 
-		 * @return The label of the unit
-		 */
-		String getUnit();
-
-		/**
-		 * 
-		 * @return the ratio from this unit to the main unit of the enum
-		 */
-		UnitRatio<?> getRatio();
-
-		/**
-		 * 
-		 * @param other The other unit
-		 * @return Finds the ratio between two unitss
-		 */
-		UnitRatio<?> getRatio(T other);
-
-		/**
-		 * 
-		 * @return The main unit of the unit type
-		 */
-		T getMainUnit();
-	}
-
-	/**
 	 * List of different distance units
 	 * 
 	 * @author OroArmor
@@ -86,13 +53,13 @@ public class UnitTypes {
 		private double conversionValue;
 		private String unitName;
 
-		DistanceUnits(double conversionValue, String unitName) {
-			this.conversionValue = conversionValue;
+		DistanceUnits(double conversionValue, DistanceUnits extendRatio, String unitName) {
+			this.conversionValue = conversionValue * extendRatio.conversionValue;
 			this.unitName = unitName;
 		}
 
-		DistanceUnits(double conversionValue, DistanceUnits extendRatio, String unitName) {
-			this.conversionValue = conversionValue * extendRatio.conversionValue;
+		DistanceUnits(double conversionValue, String unitName) {
+			this.conversionValue = conversionValue;
 			this.unitName = unitName;
 		}
 
@@ -101,8 +68,8 @@ public class UnitTypes {
 		}
 
 		@Override
-		public String getUnit() {
-			return unitName;
+		public DistanceUnits getMainUnit() {
+			return METER;
 		}
 
 		@Override
@@ -116,10 +83,101 @@ public class UnitTypes {
 		}
 
 		@Override
-		public DistanceUnits getMainUnit() {
-			return METER;
+		public String getUnit() {
+			return unitName;
 		}
 
+	}
+
+	/**
+	 * 
+	 * @author OroArmor
+	 *
+	 * @param <T> The Unit type
+	 */
+	public interface IUnitType<T extends IUnitType<?>> {
+		/**
+		 * 
+		 * @return The main unit of the unit type
+		 */
+		T getMainUnit();
+
+		/**
+		 * 
+		 * @return the ratio from this unit to the main unit of the enum
+		 */
+		UnitRatio<?> getRatio();
+
+		/**
+		 * 
+		 * @param other The other unit
+		 * @return Finds the ratio between two unitss
+		 */
+		UnitRatio<?> getRatio(T other);
+
+		/**
+		 * 
+		 * @return The label of the unit
+		 */
+		String getUnit();
+	}
+
+	/**
+	 * List of different rotation/angle units
+	 * 
+	 * @author OroArmor
+	 *
+	 */
+	public static enum RotationUnits implements IUnitType<RotationUnits> {
+		/**
+		 * Rotations
+		 */
+		ROTATION(1, "rot"),
+		/**
+		 * Degrees, 360deg = 1rot
+		 */
+		DEGREE(1d / 360d, ROTATION, "deg"),
+		/**
+		 * Radians, 2pi rad = 1 rot
+		 */
+		RADIAN(1d / (2d * Math.PI), ROTATION, "rad");
+
+		private double conversionValue;
+		private String unitName;
+
+		RotationUnits(double conversionValue, RotationUnits extendRatio, String unitName) {
+			this.conversionValue = conversionValue * extendRatio.conversionValue;
+			this.unitName = unitName;
+		}
+
+		RotationUnits(double conversionValue, String unitName) {
+			this.conversionValue = conversionValue;
+			this.unitName = unitName;
+		}
+
+		public double getConversionValue() {
+			return conversionValue;
+		}
+
+		@Override
+		public RotationUnits getMainUnit() {
+			return ROTATION;
+		}
+
+		@Override
+		public UnitRatio<Rotations> getRatio() {
+			return new UnitRatio<Rotations>(conversionValue, getUnit(), "rot");
+		}
+
+		@Override
+		public UnitRatio<Rotations> getRatio(RotationUnits other) {
+			return new UnitRatio<Rotations>(getRatio(), (UnitRatio<?>) (other.getRatio()).getInverseRatio());
+		}
+
+		@Override
+		public String getUnit() {
+			return unitName;
+		}
 	}
 
 	/**
@@ -168,8 +226,8 @@ public class UnitTypes {
 		}
 
 		@Override
-		public String getUnit() {
-			return unitName;
+		public TimeUnits getMainUnit() {
+			return SECOND;
 		}
 
 		@Override
@@ -183,68 +241,10 @@ public class UnitTypes {
 		}
 
 		@Override
-		public TimeUnits getMainUnit() {
-			return SECOND;
-		}
-
-	}
-
-	/**
-	 * List of different rotation/angle units
-	 * 
-	 * @author OroArmor
-	 *
-	 */
-	public static enum RotationUnits implements IUnitType<RotationUnits> {
-		/**
-		 * Rotations
-		 */
-		ROTATION(1, "rot"),
-		/**
-		 * Degrees, 360deg = 1rot
-		 */
-		DEGREE(1d / 360d, ROTATION, "deg"),
-		/**
-		 * Radians, 2pi rad = 1 rot
-		 */
-		RADIAN(1d / (2d * Math.PI), ROTATION, "rad");
-
-		private double conversionValue;
-		private String unitName;
-
-		RotationUnits(double conversionValue, String unitName) {
-			this.conversionValue = conversionValue;
-			this.unitName = unitName;
-		}
-
-		RotationUnits(double conversionValue, RotationUnits extendRatio, String unitName) {
-			this.conversionValue = conversionValue * extendRatio.conversionValue;
-			this.unitName = unitName;
-		}
-
-		public double getConversionValue() {
-			return conversionValue;
-		}
-
-		@Override
 		public String getUnit() {
 			return unitName;
 		}
 
-		@Override
-		public UnitRatio<Rotations> getRatio() {
-			return new UnitRatio<Rotations>(conversionValue, getUnit(), "rot");
-		}
-
-		@Override
-		public UnitRatio<Rotations> getRatio(RotationUnits other) {
-			return new UnitRatio<Rotations>(getRatio(), (UnitRatio<?>) (other.getRatio()).getInverseRatio());
-		}
-
-		@Override
-		public RotationUnits getMainUnit() {
-			return ROTATION;
-		}
 	}
 
 	/**
@@ -285,8 +285,8 @@ public class UnitTypes {
 		}
 
 		@Override
-		public String getUnit() {
-			return unitName;
+		public VoltageUnits getMainUnit() {
+			return VOLTS;
 		}
 
 		@Override
@@ -300,8 +300,8 @@ public class UnitTypes {
 		}
 
 		@Override
-		public VoltageUnits getMainUnit() {
-			return VOLTS;
+		public String getUnit() {
+			return unitName;
 		}
 	}
 

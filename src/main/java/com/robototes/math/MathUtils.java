@@ -9,13 +9,23 @@ import static java.lang.Math.*;
  */
 public class MathUtils {
 
-	public static double EPSILON = 1e-9;
-
 	/**
-	 * Prevents an instance of this class
+	 * 
+	 * @author OroArmor
+	 *
 	 */
-	private MathUtils() {
-	};
+	public static interface MathFunction {
+		/**
+		 * 
+		 * @param i Input
+		 * @return Output
+		 */
+		public double compute(double i);
+	}
+
+	public static double EPSILON = 1e-9;;
+
+	private static MathFunction cube = (i) -> pow(i, 3);
 
 	/**
 	 * Constrains a value between two other values
@@ -27,23 +37,6 @@ public class MathUtils {
 	 */
 	public static double constrain(double value, double minValue, double maxValue) {
 		return min(max(value, minValue), maxValue);
-	}
-
-	/**
-	 * 
-	 * @param value          The value to map
-	 * @param minInputValue  Lower bound of the input range
-	 * @param maxInputValue  Upper bound of the input range
-	 * @param minOutputValue Lower bound of the output range
-	 * @param maxOutputValue Upper bound of the output range
-	 * @return The value mapped from the input range to the output range
-	 */
-	public static double map(double value, double minInputValue, double maxInputValue, double minOutputValue,
-			double maxOutputValue) {
-
-		return (value - minInputValue) / (maxInputValue - minInputValue) * (maxOutputValue - minOutputValue)
-				+ minOutputValue;
-
 	}
 
 	/**
@@ -67,6 +60,41 @@ public class MathUtils {
 	}
 
 	/**
+	 * Calclates the distance from the origin in any number of dimensions
+	 * 
+	 * @param values List of values
+	 * @return The distance from the origin
+	 */
+	public static double distance(double... values) {
+		double total = 0;
+		for (double value : values) {
+			total += pow(value, 2);
+		}
+		return sqrt(total);
+	}
+
+	public static boolean epsilonEquals(double a, double b, double ep) {
+		return abs(a - b) < ep;
+	}
+
+	/**
+	 * 
+	 * @param value          The value to map
+	 * @param minInputValue  Lower bound of the input range
+	 * @param maxInputValue  Upper bound of the input range
+	 * @param minOutputValue Lower bound of the output range
+	 * @param maxOutputValue Upper bound of the output range
+	 * @return The value mapped from the input range to the output range
+	 */
+	public static double map(double value, double minInputValue, double maxInputValue, double minOutputValue,
+			double maxOutputValue) {
+
+		return (value - minInputValue) / (maxInputValue - minInputValue) * (maxOutputValue - minOutputValue)
+				+ minOutputValue;
+
+	}
+
+	/**
 	 * Runs a MathFunction on a list of values, allowing for easier ways to
 	 * manipulate many values
 	 * 
@@ -84,36 +112,8 @@ public class MathUtils {
 	}
 
 	/**
-	 * 
-	 * @author OroArmor
-	 *
+	 * Prevents an instance of this class
 	 */
-	public static interface MathFunction {
-		/**
-		 * 
-		 * @param i Input
-		 * @return Output
-		 */
-		public double compute(double i);
-	}
-
-	private static MathFunction cube = (i) -> pow(i, 3);
-
-	/**
-	 * Calclates the distance from the origin in any number of dimensions
-	 * 
-	 * @param values List of values
-	 * @return The distance from the origin
-	 */
-	public static double distance(double... values) {
-		double total = 0;
-		for (double value : values) {
-			total += pow(value, 2);
-		}
-		return sqrt(total);
-	}
-
-	public static boolean epsilonEquals(double a, double b, double ep) {
-		return abs(a - b) < ep;
+	private MathUtils() {
 	}
 }

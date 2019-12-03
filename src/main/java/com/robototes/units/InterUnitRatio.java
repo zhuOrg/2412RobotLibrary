@@ -24,21 +24,6 @@ public class InterUnitRatio<K extends IUnitType<?>, V extends IUnitType<?>> impl
 	public V toType;
 
 	/**
-	 * Creates a ratio based on two types
-	 * 
-	 * @param fromType From type
-	 * @param ratio    ratio between the two types
-	 * @param toType   To type
-	 */
-	public InterUnitRatio(K fromType, double ratio, V toType) {
-		this.fromType = fromType;
-		this.from = fromType.getUnit();
-		this.ratio = ratio;
-		this.to = toType.getUnit();
-		this.toType = toType;
-	}
-
-	/**
 	 * Creates a ratio based on two other interunit ratios, ie rotations:meters and
 	 * meters:time -> rotations:time
 	 * 
@@ -57,24 +42,19 @@ public class InterUnitRatio<K extends IUnitType<?>, V extends IUnitType<?>> impl
 
 	}
 
-	@Override
-	public double getRatio() {
-		return ratio;
-	}
-
-	@Override
-	public String getFrom() {
-		return from;
-	}
-
-	@Override
-	public String getTo() {
-		return to;
-	}
-
-	@Override
-	public double calculateRatio(IUnit<?> from) {
-		return ratio * fromType.getRatio().calculateReverseRatio(from);
+	/**
+	 * Creates a ratio based on two types
+	 * 
+	 * @param fromType From type
+	 * @param ratio    ratio between the two types
+	 * @param toType   To type
+	 */
+	public InterUnitRatio(K fromType, double ratio, V toType) {
+		this.fromType = fromType;
+		this.from = fromType.getUnit();
+		this.ratio = ratio;
+		this.to = toType.getUnit();
+		this.toType = toType;
 	}
 
 	@Override
@@ -83,8 +63,8 @@ public class InterUnitRatio<K extends IUnitType<?>, V extends IUnitType<?>> impl
 	}
 
 	@Override
-	public double calculateReverseRatio(IUnit<?> to) {
-		return 1d / ratio * toType.getRatio().calculateReverseRatio(to);
+	public double calculateRatio(IUnit<?> from) {
+		return ratio * fromType.getRatio().calculateReverseRatio(from);
 	}
 
 	@Override
@@ -93,13 +73,8 @@ public class InterUnitRatio<K extends IUnitType<?>, V extends IUnitType<?>> impl
 	}
 
 	@Override
-	public String toString() {
-		return StringUtils.getFormattedValue(getRatio(), 5) + getFrom() + ":1" + getTo();
-	}
-
-	@Override
-	public Ratio<IUnit<?>> getInverseRatio() {
-		return new InterUnitRatio<V, K>(toType, 1d / ratio, fromType);
+	public double calculateReverseRatio(IUnit<?> to) {
+		return 1d / ratio * toType.getRatio().calculateReverseRatio(to);
 	}
 
 	@Override
@@ -110,5 +85,30 @@ public class InterUnitRatio<K extends IUnitType<?>, V extends IUnitType<?>> impl
 		InterUnitRatio<?, ?> other = (InterUnitRatio<?, ?>) obj;
 		return MathUtils.epsilonEquals(ratio, other.getRatio(), MathUtils.EPSILON) && from.equals(other.getFrom())
 				&& to.equals(other.getTo());
+	}
+
+	@Override
+	public String getFrom() {
+		return from;
+	}
+
+	@Override
+	public Ratio<IUnit<?>> getInverseRatio() {
+		return new InterUnitRatio<V, K>(toType, 1d / ratio, fromType);
+	}
+
+	@Override
+	public double getRatio() {
+		return ratio;
+	}
+
+	@Override
+	public String getTo() {
+		return to;
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.getFormattedValue(getRatio(), 5) + getFrom() + ":1" + getTo();
 	}
 }

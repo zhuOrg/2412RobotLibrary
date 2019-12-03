@@ -10,17 +10,6 @@ import com.robototes.units.UnitTypes.RotationUnits;
 public class RotationsTest {
 
 	@Test
-	public void testRotations() {
-		Rotations r = new Rotations(1);
-		assertEquals("Rotations from rot", r.rotations, 1, MathUtils.EPSILON);
-
-		Rotations fromRadian = new Rotations(2 * Math.PI, RotationUnits.RADIAN);
-		assertEquals("rad to rot", fromRadian, new Rotations(1));
-		Rotations fromDegrees = new Rotations(360, RotationUnits.DEGREE);
-		assertEquals("deg to rot", fromDegrees, new Rotations(1));
-	}
-
-	@Test
 	public void testAdd() {
 		Rotations one = new Rotations(5);
 		Rotations two = new Rotations(6);
@@ -32,21 +21,13 @@ public class RotationsTest {
 	}
 
 	@Test
-	public void testSubtract() {
-		Rotations one = new Rotations(6);
-		Rotations two = new Rotations(5);
-		assertEquals("Subtract whole Rotations", one.subtract(two), new Rotations(1));
+	public void testConvertTo() {
+		Rotations oneMeter = new Rotations(1);
 
-		Rotations three = new Rotations(3.5);
-		Rotations four = new Rotations(36, RotationUnits.DEGREE);
-		assertEquals("Subtract two different Rotations", three.subtract(four), new Rotations(3.4));
-	}
+		double epsilon = 0.00001; // MathUtils.Epsilon is too small for the inaccuracies in conversion
 
-	@Test
-	public void testMultiply() {
-		Rotations one = new Rotations(5);
-		Rotations scalar = new Rotations(2);
-		assertEquals("Scale a Rotations up", one.multiply(scalar), new Rotations(10));
+		assertEquals("rot to rad", oneMeter.convertTo(RotationUnits.RADIAN), 2 * Math.PI, epsilon);
+		assertEquals("rot to deg", oneMeter.convertTo(RotationUnits.DEGREE), 360, epsilon);
 	}
 
 	@Test
@@ -63,13 +44,32 @@ public class RotationsTest {
 	}
 
 	@Test
-	public void testConvertTo() {
-		Rotations oneMeter = new Rotations(1);
+	public void testMultiply() {
+		Rotations one = new Rotations(5);
+		Rotations scalar = new Rotations(2);
+		assertEquals("Scale a Rotations up", one.multiply(scalar), new Rotations(10));
+	}
 
-		double epsilon = 0.00001; // MathUtils.Epsilon is too small for the inaccuracies in conversion
+	@Test
+	public void testRotations() {
+		Rotations r = new Rotations(1);
+		assertEquals("Rotations from rot", r.rotations, 1, MathUtils.EPSILON);
 
-		assertEquals("rot to rad", oneMeter.convertTo(RotationUnits.RADIAN), 2 * Math.PI, epsilon);
-		assertEquals("rot to deg", oneMeter.convertTo(RotationUnits.DEGREE), 360, epsilon);
+		Rotations fromRadian = new Rotations(2 * Math.PI, RotationUnits.RADIAN);
+		assertEquals("rad to rot", fromRadian, new Rotations(1));
+		Rotations fromDegrees = new Rotations(360, RotationUnits.DEGREE);
+		assertEquals("deg to rot", fromDegrees, new Rotations(1));
+	}
+
+	@Test
+	public void testSubtract() {
+		Rotations one = new Rotations(6);
+		Rotations two = new Rotations(5);
+		assertEquals("Subtract whole Rotations", one.subtract(two), new Rotations(1));
+
+		Rotations three = new Rotations(3.5);
+		Rotations four = new Rotations(36, RotationUnits.DEGREE);
+		assertEquals("Subtract two different Rotations", three.subtract(four), new Rotations(3.4));
 	}
 
 	@Test

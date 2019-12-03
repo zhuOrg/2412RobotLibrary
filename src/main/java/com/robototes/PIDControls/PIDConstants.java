@@ -39,18 +39,14 @@ public class PIDConstants {
 	}
 
 	/**
-	 * Creates a PIDConstants with all values
+	 * Creates a PIDConstants with P and D values
 	 * 
-	 * @param k_P     P value
-	 * @param k_I     I value
-	 * @param k_D     D value
-	 * @param k_IDamp Integral Dampening value
+	 * @param k_P P value
+	 * @param k_D D value
 	 */
-	public PIDConstants(double k_P, double k_I, double k_D, double k_IDamp) {
+	public PIDConstants(double k_P, double k_D) {
 		this.k_P = k_P;
-		this.k_I = k_I;
 		this.k_D = k_D;
-		this.k_IDamp = k_IDamp;
 	}
 
 	/**
@@ -67,46 +63,18 @@ public class PIDConstants {
 	}
 
 	/**
-	 * Creates a PIDConstants with P and D values
+	 * Creates a PIDConstants with all values
 	 * 
-	 * @param k_P P value
-	 * @param k_D D value
+	 * @param k_P     P value
+	 * @param k_I     I value
+	 * @param k_D     D value
+	 * @param k_IDamp Integral Dampening value
 	 */
-	public PIDConstants(double k_P, double k_D) {
+	public PIDConstants(double k_P, double k_I, double k_D, double k_IDamp) {
 		this.k_P = k_P;
-		this.k_D = k_D;
-	}
-
-	/**
-	 * 
-	 * @return The P value
-	 */
-	public double getK_P() {
-		return k_P;
-	}
-
-	/**
-	 * 
-	 * @param k_P Sets the P value
-	 */
-	public void setK_P(double k_P) {
-		this.k_P = k_P;
-	}
-
-	/**
-	 * 
-	 * @return The I value
-	 */
-	public double getK_I() {
-		return k_I;
-	}
-
-	/**
-	 * 
-	 * @param k_I Sets the I value
-	 */
-	public void setK_I(double k_I) {
 		this.k_I = k_I;
+		this.k_D = k_D;
+		this.k_IDamp = k_IDamp;
 	}
 
 	/**
@@ -119,10 +87,10 @@ public class PIDConstants {
 
 	/**
 	 * 
-	 * @param k_D Sets the D value
+	 * @return The I value
 	 */
-	public void setK_D(double k_D) {
-		this.k_D = k_D;
+	public double getK_I() {
+		return k_I;
 	}
 
 	/**
@@ -135,10 +103,42 @@ public class PIDConstants {
 
 	/**
 	 * 
+	 * @return The P value
+	 */
+	public double getK_P() {
+		return k_P;
+	}
+
+	/**
+	 * 
+	 * @param k_D Sets the D value
+	 */
+	public void setK_D(double k_D) {
+		this.k_D = k_D;
+	}
+
+	/**
+	 * 
+	 * @param k_I Sets the I value
+	 */
+	public void setK_I(double k_I) {
+		this.k_I = k_I;
+	}
+
+	/**
+	 * 
 	 * @param k_IDamp Sets the Integral Dampening value
 	 */
 	public void setK_IDamp(double k_IDamp) {
 		this.k_IDamp = k_IDamp;
+	}
+
+	/**
+	 * 
+	 * @param k_P Sets the P value
+	 */
+	public void setK_P(double k_P) {
+		this.k_P = k_P;
 	}
 
 }

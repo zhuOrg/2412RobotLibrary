@@ -30,28 +30,13 @@ public class PIDCanSparkMax extends CANSparkMax implements PIDMotorController<Sp
 	}
 
 	@Override
-	public void setRotations(SparkMaxRotations rotations) {
-		this.setPoint = rotations;
-	}
-
-	@Override
-	public void setRotations(Rotations rotations) {
-		this.setRotations(new SparkMaxRotations(rotations));
-	}
-
-	@Override
-	public void addRotations(SparkMaxRotations rotations) {
-		this.setPoint = (SparkMaxRotations) this.setPoint.add(rotations);
-	}
-
-	@Override
 	public void addRotations(Rotations rotations) {
 		this.addRotations(new SparkMaxRotations(rotations));
 	}
 
 	@Override
-	public double usePIDOutput() {
-		return usePIDOutput(new Time(5, TimeUnits.MILLISECOND)); // loop time of robot
+	public void addRotations(SparkMaxRotations rotations) {
+		this.setPoint = (SparkMaxRotations) this.setPoint.add(rotations);
 	}
 
 	@Override
@@ -61,15 +46,30 @@ public class PIDCanSparkMax extends CANSparkMax implements PIDMotorController<Sp
 	}
 
 	@Override
-	public double usePIDOutput(Time timestep) {
-		double output = controller.getOutput(setPoint.subtract(getRotations()).getValue(), timestep.getValue());
-		this.set(output);
-		return output;
+	public void setRotations(Rotations rotations) {
+		this.setRotations(new SparkMaxRotations(rotations));
+	}
+
+	@Override
+	public void setRotations(SparkMaxRotations rotations) {
+		this.setPoint = rotations;
 	}
 
 	@Override
 	public void setSpeed(double speed) {
 		this.set(speed);
+	}
+
+	@Override
+	public double usePIDOutput() {
+		return usePIDOutput(new Time(5, TimeUnits.MILLISECOND)); // loop time of robot
+	}
+
+	@Override
+	public double usePIDOutput(Time timestep) {
+		double output = controller.getOutput(setPoint.subtract(getRotations()).getValue(), timestep.getValue());
+		this.set(output);
+		return output;
 	}
 
 }

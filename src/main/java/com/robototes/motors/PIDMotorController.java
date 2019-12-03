@@ -13,18 +13,18 @@ import com.robototes.units.Time;
 public interface PIDMotorController<T extends MotorRotations> {
 
 	/**
-	 * Uses the PID output of the PID Controller, with a timestep of 5 milliseconds
+	 * Adds rotations for PID control
 	 * 
-	 * @return The value of the PID Output
+	 * @param rotationReference
 	 */
-	public double usePIDOutput();
+	public void addRotations(Rotations rotationReference);
 
 	/**
-	 * Uses the PID output of the PID Controller
+	 * Adds rotations for PID control
 	 * 
-	 * @return The value of the PID Output
+	 * @param rotationReference
 	 */
-	public double usePIDOutput(Time timestep);
+	public void addRotations(T rotations);
 
 	/**
 	 * 
@@ -47,23 +47,23 @@ public interface PIDMotorController<T extends MotorRotations> {
 	public void setRotations(T rotations);
 
 	/**
-	 * Adds rotations for PID control
-	 * 
-	 * @param rotationReference
-	 */
-	public void addRotations(Rotations rotationReference);
-
-	/**
-	 * Adds rotations for PID control
-	 * 
-	 * @param rotationReference
-	 */
-	public void addRotations(T rotations);
-
-	/**
 	 * Sets the speed of the motor, allowing for manual control
 	 * 
 	 * @param speed speed
 	 */
 	public void setSpeed(double speed);
+
+	/**
+	 * Uses the PID output of the PID Controller, with a timestep of 5 milliseconds
+	 * 
+	 * @return The value of the PID Output
+	 */
+	public double usePIDOutput();
+
+	/**
+	 * Uses the PID output of the PID Controller
+	 * 
+	 * @return The value of the PID Output
+	 */
+	public double usePIDOutput(Time timestep);
 }

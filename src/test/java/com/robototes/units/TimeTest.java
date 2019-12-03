@@ -10,21 +10,6 @@ import com.robototes.units.UnitTypes.TimeUnits;
 public class TimeTest {
 
 	@Test
-	public void testTime() {
-		Time d = new Time(1);
-		assertEquals("Time from time", d.time, 1, MathUtils.EPSILON);
-
-		Time fromMillis = new Time(1000, TimeUnits.MILLISECOND);
-		assertEquals("millis to sec", fromMillis, new Time(1));
-		Time fromDay = new Time(1d / (60 * 60 * 24), TimeUnits.DAY);
-		assertEquals("day to sec", fromDay, new Time(1));
-		Time fromHour = new Time(1d / 3600d, TimeUnits.HOUR);
-		assertEquals("hour to sec", fromHour, new Time(1));
-		Time fromMin = new Time(1d / 60d, TimeUnits.MINUTE);
-		assertEquals("min to sec", fromMin, new Time(1));
-	}
-
-	@Test
 	public void testAdd() {
 		Time one = new Time(5);
 		Time two = new Time(6);
@@ -36,21 +21,16 @@ public class TimeTest {
 	}
 
 	@Test
-	public void testSubtract() {
-		Time one = new Time(6);
-		Time two = new Time(5);
-		assertEquals("Subtract whole Time", one.subtract(two), new Time(1));
+	public void testConvertTo() {
+		Time oneMeter = new Time(1);
 
-		Time three = new Time(3.5);
-		Time four = new Time(10, TimeUnits.MILLISECOND);
-		assertEquals("Subtract two different Times", three.subtract(four), new Time(3.49));
-	}
+		double epsilon = 0.00001; // MathUtils.Epsilon is too small for the inaccuracies in conversion
 
-	@Test
-	public void testMultiply() {
-		Time one = new Time(5);
-		Time scalar = new Time(2);
-		assertEquals("Scale a Time up", one.multiply(scalar), new Time(10));
+		assertEquals("sec to millis", oneMeter.convertTo(TimeUnits.MILLISECOND), 1000, epsilon);
+		assertEquals("sec to day", oneMeter.convertTo(TimeUnits.DAY), 1d / (60 * 60 * 24), epsilon);
+		assertEquals("sec to hour", oneMeter.convertTo(TimeUnits.HOUR), 1d / (3600d), epsilon);
+		assertEquals("sec to minute", oneMeter.convertTo(TimeUnits.MINUTE), 1d / (60d), epsilon);
+
 	}
 
 	@Test
@@ -67,16 +47,36 @@ public class TimeTest {
 	}
 
 	@Test
-	public void testConvertTo() {
-		Time oneMeter = new Time(1);
+	public void testMultiply() {
+		Time one = new Time(5);
+		Time scalar = new Time(2);
+		assertEquals("Scale a Time up", one.multiply(scalar), new Time(10));
+	}
 
-		double epsilon = 0.00001; // MathUtils.Epsilon is too small for the inaccuracies in conversion
+	@Test
+	public void testSubtract() {
+		Time one = new Time(6);
+		Time two = new Time(5);
+		assertEquals("Subtract whole Time", one.subtract(two), new Time(1));
 
-		assertEquals("sec to millis", oneMeter.convertTo(TimeUnits.MILLISECOND), 1000, epsilon);
-		assertEquals("sec to day", oneMeter.convertTo(TimeUnits.DAY), 1d / (60 * 60 * 24), epsilon);
-		assertEquals("sec to hour", oneMeter.convertTo(TimeUnits.HOUR), 1d / (3600d), epsilon);
-		assertEquals("sec to minute", oneMeter.convertTo(TimeUnits.MINUTE), 1d / (60d), epsilon);
+		Time three = new Time(3.5);
+		Time four = new Time(10, TimeUnits.MILLISECOND);
+		assertEquals("Subtract two different Times", three.subtract(four), new Time(3.49));
+	}
 
+	@Test
+	public void testTime() {
+		Time d = new Time(1);
+		assertEquals("Time from time", d.time, 1, MathUtils.EPSILON);
+
+		Time fromMillis = new Time(1000, TimeUnits.MILLISECOND);
+		assertEquals("millis to sec", fromMillis, new Time(1));
+		Time fromDay = new Time(1d / (60 * 60 * 24), TimeUnits.DAY);
+		assertEquals("day to sec", fromDay, new Time(1));
+		Time fromHour = new Time(1d / 3600d, TimeUnits.HOUR);
+		assertEquals("hour to sec", fromHour, new Time(1));
+		Time fromMin = new Time(1d / 60d, TimeUnits.MINUTE);
+		assertEquals("min to sec", fromMin, new Time(1));
 	}
 
 	@Test

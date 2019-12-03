@@ -27,9 +27,9 @@ public class DistanceSubsystem<T extends PIDMotorController<?>> implements PIDSu
 	}
 
 	@Override
-	public void setReference(Distance reference) {
-		currentReference = reference;
-		Rotations rotationReference = new Rotations(rotationsToDistance.calculateReverseRatio(reference));
+	public void addRefecence(Distance addRefernce) {
+		currentReference = currentReference.add(addRefernce);
+		Rotations rotationReference = new Rotations(rotationsToDistance.calculateReverseRatio(currentReference));
 		for (T motor : motors) {
 			motor.setRotations(rotationReference);
 		}
@@ -52,9 +52,16 @@ public class DistanceSubsystem<T extends PIDMotorController<?>> implements PIDSu
 	}
 
 	@Override
-	public void addRefecence(Distance addRefernce) {
-		currentReference = currentReference.add(addRefernce);
-		Rotations rotationReference = new Rotations(rotationsToDistance.calculateReverseRatio(currentReference));
+	public void setMotorSpeed(double speed) {
+		for (T motor : motors) {
+			motor.setSpeed(speed);
+		}
+	}
+
+	@Override
+	public void setReference(Distance reference) {
+		currentReference = reference;
+		Rotations rotationReference = new Rotations(rotationsToDistance.calculateReverseRatio(reference));
 		for (T motor : motors) {
 			motor.setRotations(rotationReference);
 		}
@@ -64,13 +71,6 @@ public class DistanceSubsystem<T extends PIDMotorController<?>> implements PIDSu
 	public void usePID() {
 		for (T motor : motors) {
 			motor.usePIDOutput();
-		}
-	}
-
-	@Override
-	public void setMotorSpeed(double speed) {
-		for (T motor : motors) {
-			motor.setSpeed(speed);
 		}
 	}
 }

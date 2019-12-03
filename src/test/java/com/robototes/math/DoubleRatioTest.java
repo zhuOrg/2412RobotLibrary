@@ -7,16 +7,6 @@ import org.junit.Test;
 public class DoubleRatioTest {
 
 	@Test
-	public void testCombiningRatios() {
-		DoubleRatio a = new DoubleRatio(5, "a", "b");
-		DoubleRatio b = new DoubleRatio(3, "b", "c");
-
-		DoubleRatio c = new DoubleRatio(15, "a", "c");
-
-		assertEquals("Combination Ratio", new DoubleRatio(a, b), c);
-	}
-
-	@Test
 	public void testCalculateRatio() {
 		DoubleRatio one = new DoubleRatio(10, "a", "b");
 
@@ -34,10 +24,13 @@ public class DoubleRatioTest {
 	}
 
 	@Test
-	public void testToString() {
-		DoubleRatio one = new DoubleRatio(10, "a", "b");
+	public void testCombiningRatios() {
+		DoubleRatio a = new DoubleRatio(5, "a", "b");
+		DoubleRatio b = new DoubleRatio(3, "b", "c");
 
-		assertEquals("Test toString()", one.toString(), "10a:b");
+		DoubleRatio c = new DoubleRatio(15, "a", "c");
+
+		assertEquals("Combination Ratio", new DoubleRatio(a, b), c);
 	}
 
 	@Test
@@ -46,6 +39,13 @@ public class DoubleRatioTest {
 		DoubleRatio oneInverse = new DoubleRatio(0.1, "b", "a");
 
 		assertEquals("Test inverse is equal", one.getInverseRatio(), oneInverse);
+	}
+
+	@Test
+	public void testToString() {
+		DoubleRatio one = new DoubleRatio(10, "a", "b");
+
+		assertEquals("Test toString()", one.toString(), "10a:b");
 	}
 
 }

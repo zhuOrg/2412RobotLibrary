@@ -10,14 +10,6 @@ import com.robototes.units.Rotations;
  *
  */
 public abstract class MotorRotations extends Rotations {
-	public MotorRotations(double value) {
-		super(value);
-	}
-
-	public MotorRotations(Rotations rotations) {
-		super(rotations.getValue());
-	}
-
 	/**
 	 * Rotations for CANSparkMax
 	 * 
@@ -35,5 +27,13 @@ public abstract class MotorRotations extends Rotations {
 		public SparkMaxRotations(Rotations rotations) {
 			super(rotations);
 		}
+	}
+
+	public MotorRotations(double value) {
+		super(value);
+	}
+
+	public MotorRotations(Rotations rotations) {
+		super(rotations.getValue());
 	}
 }

@@ -14,13 +14,6 @@ public class MathUtilsTest {
 	}
 
 	@Test
-	public void testMap() {
-		double value = 5;
-		assertEquals("Mapping a value within range", map(value, 0, 10, 0, 100), 50, EPSILON);
-		assertEquals("Mapping a value outside of the range", map(value, 0, 1, 0, 10), 50, EPSILON);
-	}
-
-	@Test
 	public void testCube() {
 		assertEquals("Cubing a postive value", cube(3), 27, EPSILON);
 		assertEquals("Cubing a negative value", cube(-1d / 2d), -1d / 8d, EPSILON);
@@ -32,14 +25,6 @@ public class MathUtilsTest {
 		double[] cubedValues = { 1, 8, 27, 64 };
 
 		assertArrayEquals("Cubing an array of values", cubeValues(values), cubedValues, EPSILON);
-	}
-
-	@Test
-	public void testRunFunction() {
-		MathFunction function = i -> 2 * i;
-		double[] input = { 1, 2, 3, 4 };
-		double[] output = { 2, 4, 6, 8 };
-		assertArrayEquals("Running a function", runFunction(input, function), output, EPSILON);
 	}
 
 	@Test
@@ -59,6 +44,21 @@ public class MathUtilsTest {
 		assertTrue("True equals", epsilonEquals(1, 1, EPSILON));
 		assertTrue("Close equals", epsilonEquals(1, 1.00000000001, EPSILON));
 		assertFalse("Not equal", epsilonEquals(1, 2, EPSILON));
+	}
+
+	@Test
+	public void testMap() {
+		double value = 5;
+		assertEquals("Mapping a value within range", map(value, 0, 10, 0, 100), 50, EPSILON);
+		assertEquals("Mapping a value outside of the range", map(value, 0, 1, 0, 10), 50, EPSILON);
+	}
+
+	@Test
+	public void testRunFunction() {
+		MathFunction function = i -> 2 * i;
+		double[] input = { 1, 2, 3, 4 };
+		double[] output = { 2, 4, 6, 8 };
+		assertArrayEquals("Running a function", runFunction(input, function), output, EPSILON);
 	}
 
 }

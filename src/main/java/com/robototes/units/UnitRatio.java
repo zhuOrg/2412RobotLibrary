@@ -70,18 +70,13 @@ public class UnitRatio<T extends IUnit<?>> implements Ratio<IUnit<?>> {
 	}
 
 	@Override
-	public double calculateRatio(IUnit<?> from) {
-		return from.getValue() * ratio;
-	}
-
-	@Override
 	public double calculateRatio(double from) {
 		return from * ratio;
 	}
 
 	@Override
-	public double calculateReverseRatio(IUnit<?> to) {
-		return to.getValue() * (1d / ratio);
+	public double calculateRatio(IUnit<?> from) {
+		return from.getValue() * ratio;
 	}
 
 	@Override
@@ -90,28 +85,8 @@ public class UnitRatio<T extends IUnit<?>> implements Ratio<IUnit<?>> {
 	}
 
 	@Override
-	public double getRatio() {
-		return ratio;
-	}
-
-	@Override
-	public String getFrom() {
-		return from;
-	}
-
-	@Override
-	public String getTo() {
-		return to;
-	}
-
-	@Override
-	public String toString() {
-		return StringUtils.getFormattedValue(1d / getRatio(), 5) + getFrom() + ":1" + getTo();
-	}
-
-	@Override
-	public Ratio<IUnit<?>> getInverseRatio() {
-		return new UnitRatio<T>(1d / ratio, to, from);
+	public double calculateReverseRatio(IUnit<?> to) {
+		return to.getValue() * (1d / ratio);
 	}
 
 	@Override
@@ -122,5 +97,30 @@ public class UnitRatio<T extends IUnit<?>> implements Ratio<IUnit<?>> {
 		UnitRatio<?> other = (UnitRatio<?>) obj;
 		return MathUtils.epsilonEquals(ratio, other.getRatio(), MathUtils.EPSILON) && from.equals(other.getFrom())
 				&& to.equals(other.getTo());
+	}
+
+	@Override
+	public String getFrom() {
+		return from;
+	}
+
+	@Override
+	public Ratio<IUnit<?>> getInverseRatio() {
+		return new UnitRatio<T>(1d / ratio, to, from);
+	}
+
+	@Override
+	public double getRatio() {
+		return ratio;
+	}
+
+	@Override
+	public String getTo() {
+		return to;
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.getFormattedValue(1d / getRatio(), 5) + getFrom() + ":1" + getTo();
 	}
 }

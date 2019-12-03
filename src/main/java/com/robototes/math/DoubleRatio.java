@@ -50,18 +50,13 @@ public class DoubleRatio implements Ratio<Double> {
 	}
 
 	@Override
-	public double calculateRatio(Double from) {
-		return from * ratio;
-	}
-
-	@Override
 	public double calculateRatio(double from) {
 		return from * ratio;
 	}
 
 	@Override
-	public double calculateReverseRatio(Double to) {
-		return 1d / ratio * to;
+	public double calculateRatio(Double from) {
+		return from * ratio;
 	}
 
 	@Override
@@ -70,28 +65,8 @@ public class DoubleRatio implements Ratio<Double> {
 	}
 
 	@Override
-	public double getRatio() {
-		return ratio;
-	}
-
-	@Override
-	public String getFrom() {
-		return from;
-	}
-
-	@Override
-	public String getTo() {
-		return to;
-	}
-
-	@Override
-	public String toString() {
-		return StringUtils.getFormattedValue(getRatio(), 5) + getFrom() + ":" + getTo();
-	}
-
-	@Override
-	public Ratio<Double> getInverseRatio() {
-		return new DoubleRatio(1d / ratio, to, from);
+	public double calculateReverseRatio(Double to) {
+		return 1d / ratio * to;
 	}
 
 	@Override
@@ -104,5 +79,30 @@ public class DoubleRatio implements Ratio<Double> {
 
 		return MathUtils.epsilonEquals(ratio, other.ratio, MathUtils.EPSILON) && from.equals(other.getFrom())
 				&& to.equals(other.getTo());
+	}
+
+	@Override
+	public String getFrom() {
+		return from;
+	}
+
+	@Override
+	public Ratio<Double> getInverseRatio() {
+		return new DoubleRatio(1d / ratio, to, from);
+	}
+
+	@Override
+	public double getRatio() {
+		return ratio;
+	}
+
+	@Override
+	public String getTo() {
+		return to;
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.getFormattedValue(getRatio(), 5) + getFrom() + ":" + getTo();
 	}
 }

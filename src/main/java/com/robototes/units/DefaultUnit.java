@@ -20,18 +20,8 @@ public class DefaultUnit implements IUnit<DefaultUnit> {
 	}
 
 	@Override
-	public DefaultUnit subtract(DefaultUnit other) {
-		return new DefaultUnit(this.value - other.value, this.unit);
-	}
-
-	@Override
-	public double getValue() {
-		return value;
-	}
-
-	@Override
-	public String getUnit() {
-		return unit;
+	public <K extends IUnitType<K>> double convertTo(K unitType) {
+		return unitType.getRatio().calculateReverseRatio(value);
 	}
 
 	@Override
@@ -39,19 +29,9 @@ public class DefaultUnit implements IUnit<DefaultUnit> {
 		return new DefaultUnit(this.value / other.value, this.unit);
 	}
 
-	@Override
-	public DefaultUnit multiply(DefaultUnit other) {
-		return new DefaultUnit(this.value * other.value, this.unit);
-	}
-
-	@Override
-	public <K extends IUnitType<K>> double convertTo(K unitType) {
-		return unitType.getRatio().calculateReverseRatio(value);
-	}
-
-	@Override
-	public String toString() {
-		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	public boolean equals(IUnit<?> other) {
+		return MathUtils.epsilonEquals(value, other.getValue(), 0.00001) && this.unit.equals(other.getUnit());
+		// Epsilion is too big with conversion values
 	}
 
 	@Override
@@ -62,9 +42,29 @@ public class DefaultUnit implements IUnit<DefaultUnit> {
 		return equals((IUnit<?>) obj);
 	}
 
-	public boolean equals(IUnit<?> other) {
-		return MathUtils.epsilonEquals(value, other.getValue(), 0.00001) && this.unit.equals(other.getUnit());
-		// Epsilion is too big with conversion values
+	@Override
+	public String getUnit() {
+		return unit;
+	}
+
+	@Override
+	public double getValue() {
+		return value;
+	}
+
+	@Override
+	public DefaultUnit multiply(DefaultUnit other) {
+		return new DefaultUnit(this.value * other.value, this.unit);
+	}
+
+	@Override
+	public DefaultUnit subtract(DefaultUnit other) {
+		return new DefaultUnit(this.value - other.value, this.unit);
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
 
 }

@@ -17,12 +17,12 @@ public interface Operable<T> {
 	T add(T other);
 
 	/**
-	 * Subtracts two values
+	 * Divides two values
 	 * 
 	 * @param other Other value
-	 * @return Subtracted value
+	 * @return Divided value
 	 */
-	T subtract(T other);
+	T divide(T other);
 
 	/**
 	 * Multiplies two values
@@ -33,10 +33,10 @@ public interface Operable<T> {
 	T multiply(T other);
 
 	/**
-	 * Divides two values
+	 * Subtracts two values
 	 * 
 	 * @param other Other value
-	 * @return Divided value
+	 * @return Subtracted value
 	 */
-	T divide(T other);
+	T subtract(T other);
 }

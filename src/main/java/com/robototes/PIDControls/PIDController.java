@@ -52,30 +52,6 @@ public class PIDController {
 	}
 
 	/**
-	 * 
-	 * @param constants Sets the constants of the controller
-	 */
-	public void setConstants(PIDConstants constants) {
-		this.constants = constants;
-	}
-
-	/**
-	 * Sets the output range
-	 * 
-	 * @param min Minimum output
-	 * @param max Maximum output
-	 */
-	public void setMinMax(double min, double max) {
-
-		if (max < min) {
-			throw new IllegalArgumentException("Min cannot be greater than max");
-		}
-
-		minOutput = min;
-		maxOutput = max;
-	}
-
-	/**
 	 * Calculated the output of the PID function with the constants
 	 * 
 	 * @param error    The error of the PID System
@@ -102,6 +78,30 @@ public class PIDController {
 		pastError = error; // set values for the next calculation
 
 		return output;
+	}
+
+	/**
+	 * 
+	 * @param constants Sets the constants of the controller
+	 */
+	public void setConstants(PIDConstants constants) {
+		this.constants = constants;
+	}
+
+	/**
+	 * Sets the output range
+	 * 
+	 * @param min Minimum output
+	 * @param max Maximum output
+	 */
+	public void setMinMax(double min, double max) {
+
+		if (max < min) {
+			throw new IllegalArgumentException("Min cannot be greater than max");
+		}
+
+		minOutput = min;
+		maxOutput = max;
 	}
 
 }

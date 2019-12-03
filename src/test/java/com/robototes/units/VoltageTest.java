@@ -11,17 +11,6 @@ import com.robototes.units.UsefulUnits.Voltage;
 public class VoltageTest {
 
 	@Test
-	public void testVoltage() {
-		Voltage r = new Voltage(1);
-		assertEquals("Voltage from volt", r.voltage, 1, MathUtils.EPSILON);
-
-		Voltage fromMILLIVOLTS = new Voltage(1000, VoltageUnits.MILLIVOLTS);
-		assertEquals("mV to volt", fromMILLIVOLTS, new Voltage(1));
-		Voltage fromKILOVOLTSs = new Voltage(0.001, VoltageUnits.KILOVOLTS);
-		assertEquals("kV to volt", fromKILOVOLTSs, new Voltage(1));
-	}
-
-	@Test
 	public void testAdd() {
 		Voltage one = new Voltage(5);
 		Voltage two = new Voltage(6);
@@ -33,21 +22,13 @@ public class VoltageTest {
 	}
 
 	@Test
-	public void testSubtract() {
-		Voltage one = new Voltage(6);
-		Voltage two = new Voltage(5);
-		assertEquals("Subtract whole Voltage", one.subtract(two), new Voltage(1));
+	public void testConvertTo() {
+		Voltage oneMeter = new Voltage(1);
 
-		Voltage three = new Voltage(3.5);
-		Voltage four = new Voltage(10, VoltageUnits.MILLIVOLTS);
-		assertEquals("Subtract two different Voltage", three.subtract(four), new Voltage(3.49));
-	}
+		double epsilon = 0.00001; // MathUtils.Epsilon is too small for the inaccuracies in conversion
 
-	@Test
-	public void testMultiply() {
-		Voltage one = new Voltage(5);
-		Voltage scalar = new Voltage(2);
-		assertEquals("Scale a Voltage up", one.multiply(scalar), new Voltage(10));
+		assertEquals("volt to mV", oneMeter.convertTo(VoltageUnits.MILLIVOLTS), 1000, epsilon);
+		assertEquals("volt to kV", oneMeter.convertTo(VoltageUnits.KILOVOLTS), 0.001, epsilon);
 	}
 
 	@Test
@@ -64,13 +45,21 @@ public class VoltageTest {
 	}
 
 	@Test
-	public void testConvertTo() {
-		Voltage oneMeter = new Voltage(1);
+	public void testMultiply() {
+		Voltage one = new Voltage(5);
+		Voltage scalar = new Voltage(2);
+		assertEquals("Scale a Voltage up", one.multiply(scalar), new Voltage(10));
+	}
 
-		double epsilon = 0.00001; // MathUtils.Epsilon is too small for the inaccuracies in conversion
+	@Test
+	public void testSubtract() {
+		Voltage one = new Voltage(6);
+		Voltage two = new Voltage(5);
+		assertEquals("Subtract whole Voltage", one.subtract(two), new Voltage(1));
 
-		assertEquals("volt to mV", oneMeter.convertTo(VoltageUnits.MILLIVOLTS), 1000, epsilon);
-		assertEquals("volt to kV", oneMeter.convertTo(VoltageUnits.KILOVOLTS), 0.001, epsilon);
+		Voltage three = new Voltage(3.5);
+		Voltage four = new Voltage(10, VoltageUnits.MILLIVOLTS);
+		assertEquals("Subtract two different Voltage", three.subtract(four), new Voltage(3.49));
 	}
 
 	@Test
@@ -80,6 +69,17 @@ public class VoltageTest {
 
 		Voltage two = new Voltage(1, VoltageUnits.KILOVOLTS);
 		assertEquals("Complex toString()", two.toString(), "1000V");
+	}
+
+	@Test
+	public void testVoltage() {
+		Voltage r = new Voltage(1);
+		assertEquals("Voltage from volt", r.voltage, 1, MathUtils.EPSILON);
+
+		Voltage fromMILLIVOLTS = new Voltage(1000, VoltageUnits.MILLIVOLTS);
+		assertEquals("mV to volt", fromMILLIVOLTS, new Voltage(1));
+		Voltage fromKILOVOLTSs = new Voltage(0.001, VoltageUnits.KILOVOLTS);
+		assertEquals("kV to volt", fromKILOVOLTSs, new Voltage(1));
 	}
 
 }

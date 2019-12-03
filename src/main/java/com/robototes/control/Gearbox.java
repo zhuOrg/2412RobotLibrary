@@ -15,6 +15,16 @@ public class Gearbox {
 	private InterUnitRatio<RotationUnits, RotationUnits> ratio;
 
 	/**
+	 * Creates a gearbox from two other gearboxes
+	 * 
+	 * @param one first gearbox
+	 * @param two second gearbox
+	 */
+	public Gearbox(Gearbox one, Gearbox two) {
+		ratio = new InterUnitRatio<RotationUnits, RotationUnits>(one.ratio, two.ratio);
+	}
+
+	/**
 	 * Creates a gearbox based on two rotations
 	 * 
 	 * @param inputRotations  Input rotations
@@ -23,16 +33,6 @@ public class Gearbox {
 	 */
 	public Gearbox(Rotations inputRotations, double gearboxRatio, Rotations outputRotations) {
 		ratio = new InterUnitRatio<RotationUnits, RotationUnits>(Rotations.mainUnit, gearboxRatio, Rotations.mainUnit);
-	}
-
-	/**
-	 * Creates a gearbox from two other gearboxes
-	 * 
-	 * @param one first gearbox
-	 * @param two second gearbox
-	 */
-	public Gearbox(Gearbox one, Gearbox two) {
-		ratio = new InterUnitRatio<RotationUnits, RotationUnits>(one.ratio, two.ratio);
 	}
 
 	/**

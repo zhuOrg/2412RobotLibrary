@@ -14,14 +14,14 @@ import com.robototes.utils.StringUtils;
 public class Rotations implements IUnit<Rotations> {
 
 	/**
-	 * The number of rotations
-	 */
-	public double rotations;
-
-	/**
 	 * The main rotation unit
 	 */
 	public static RotationUnits mainUnit = RotationUnits.ROTATION;
+
+	/**
+	 * The number of rotations
+	 */
+	public double rotations;
 
 	/**
 	 * 
@@ -47,39 +47,13 @@ public class Rotations implements IUnit<Rotations> {
 	}
 
 	@Override
-	public Rotations subtract(Rotations other) {
-		return new Rotations(this.rotations - other.rotations);
-	}
-
-	@Override
-	public double getValue() {
-		return rotations;
-	}
-
-	@Override
-	public String getUnit() {
-		return mainUnit.getUnit();
-	}
-
-	@Override
-	public Rotations divide(Rotations other) {
-		return new Rotations(this.rotations / other.rotations);
-	}
-
-	@Override
-	public Rotations multiply(Rotations other) {
-		return new Rotations(this.rotations * other.rotations);
-
-	}
-
-	@Override
 	public <K extends IUnitType<K>> double convertTo(K unitType) {
 		return unitType.getRatio().calculateReverseRatio(rotations);
 	}
 
 	@Override
-	public String toString() {
-		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	public Rotations divide(Rotations other) {
+		return new Rotations(this.rotations / other.rotations);
 	}
 
 	@Override
@@ -93,5 +67,31 @@ public class Rotations implements IUnit<Rotations> {
 	public boolean equals(Rotations other) {
 		return MathUtils.epsilonEquals(this.getValue(), other.getValue(), 0.00001);
 		// Epsilion is too big with conversion values
+	}
+
+	@Override
+	public String getUnit() {
+		return mainUnit.getUnit();
+	}
+
+	@Override
+	public double getValue() {
+		return rotations;
+	}
+
+	@Override
+	public Rotations multiply(Rotations other) {
+		return new Rotations(this.rotations * other.rotations);
+
+	}
+
+	@Override
+	public Rotations subtract(Rotations other) {
+		return new Rotations(this.rotations - other.rotations);
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
 }

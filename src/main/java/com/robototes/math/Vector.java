@@ -35,6 +35,19 @@ public class Vector {
 	}
 
 	/**
+	 * Constructs a vector with length one and a given angle
+	 * 
+	 * @param angle angle of the vector in radians
+	 */
+	public Vector(double angle) {
+		this.angle = angle;
+		this.length = 1;
+
+		this.x = Math.cos(angle);
+		this.y = Math.sin(angle);
+	}
+
+	/**
 	 * Constructs a vector with x and y values
 	 * 
 	 * @param x x value of the vector
@@ -46,19 +59,6 @@ public class Vector {
 
 		this.length = MathUtils.distance(x, y);
 		this.angle = atan2(y, x);
-	}
-
-	/**
-	 * Constructs a vector with length one and a given angle
-	 * 
-	 * @param angle angle of the vector in radians
-	 */
-	public Vector(double angle) {
-		this.angle = angle;
-		this.length = 1;
-
-		this.x = Math.cos(angle);
-		this.y = Math.sin(angle);
 	}
 
 	/**
@@ -83,6 +83,66 @@ public class Vector {
 	}
 
 	/**
+	 * Finds the angle between two vectors
+	 * 
+	 * @param other Vector to find the angle between
+	 * @return A radian value for the angle between two vectors
+	 */
+	public double angleBetween(Vector other) {
+		return atan2(other.y, other.x) - atan2(this.y, this.x);
+	}
+
+	/**
+	 * Scales a vector through division
+	 * 
+	 * @param scale The value to divide the vector by
+	 * @return The vector after being divided
+	 */
+	public Vector divide(double scale) {
+		this.x /= scale;
+		this.y /= scale;
+		this.length /= scale;
+		return this;
+	}
+
+	/**
+	 * The dot product of two vectors
+	 * 
+	 * @param other The vector to calculated the dot product with
+	 * @return A double representing the dot product
+	 */
+	public double dot(Vector other) {
+		return this.x * other.x + this.y * other.y;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+
+		if (!(other instanceof Vector)) {
+			return false;
+		}
+
+		return equals((Vector) other, MathUtils.EPSILON);
+	}
+
+	public boolean equals(Vector other, double epsilon) {
+		return MathUtils.epsilonEquals(x, other.x, epsilon) && MathUtils.epsilonEquals(y, other.y, epsilon);
+	}
+
+	/**
+	 * Scales a vector through multiplication
+	 * 
+	 * @param scale The value to multiply the vector by
+	 * @return The vector after being multiplied
+	 */
+	public Vector multiply(double scale) {
+		this.x *= scale;
+		this.y *= scale;
+		this.length *= scale;
+		return this;
+	}
+
+	/**
 	 * Subtracts x and y values
 	 * 
 	 * @param x x value to subtract
@@ -101,66 +161,6 @@ public class Vector {
 	 */
 	public Vector sub(Vector other) {
 		return sub(other.x, other.y);
-	}
-
-	/**
-	 * Scales a vector through division
-	 * 
-	 * @param scale The value to divide the vector by
-	 * @return The vector after being divided
-	 */
-	public Vector divide(double scale) {
-		this.x /= scale;
-		this.y /= scale;
-		this.length /= scale;
-		return this;
-	}
-
-	/**
-	 * Scales a vector through multiplication
-	 * 
-	 * @param scale The value to multiply the vector by
-	 * @return The vector after being multiplied
-	 */
-	public Vector multiply(double scale) {
-		this.x *= scale;
-		this.y *= scale;
-		this.length *= scale;
-		return this;
-	}
-
-	/**
-	 * The dot product of two vectors
-	 * 
-	 * @param other The vector to calculated the dot product with
-	 * @return A double representing the dot product
-	 */
-	public double dot(Vector other) {
-		return this.x * other.x + this.y * other.y;
-	}
-
-	/**
-	 * Finds the angle between two vectors
-	 * 
-	 * @param other Vector to find the angle between
-	 * @return A radian value for the angle between two vectors
-	 */
-	public double angleBetween(Vector other) {
-		return atan2(other.y, other.x) - atan2(this.y, this.x);
-	}
-
-	@Override
-	public boolean equals(Object other) {
-
-		if (!(other instanceof Vector)) {
-			return false;
-		}
-
-		return equals((Vector) other, MathUtils.EPSILON);
-	}
-
-	public boolean equals(Vector other, double epsilon) {
-		return MathUtils.epsilonEquals(x, other.x, epsilon) && MathUtils.epsilonEquals(y, other.y, epsilon);
 	}
 
 	@Override

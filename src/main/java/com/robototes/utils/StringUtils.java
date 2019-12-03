@@ -10,9 +10,14 @@ import java.text.DecimalFormat;
 public class StringUtils {
 
 	/**
-	 * Prevents an instance of this class
+	 * 
+	 * @param valueLength The number of wanted decimal places (Should be a value
+	 *                    above 0)
+	 * @return A formatted value as a string
 	 */
-	private StringUtils() {
+	public static String getFormattedValue(double value, int valueLength) {
+		DecimalFormat formatter = new DecimalFormat("#." + StringUtils.repeatString("#", valueLength));
+		return formatter.format(value);
 	};
 
 	/**
@@ -30,13 +35,8 @@ public class StringUtils {
 	}
 
 	/**
-	 * 
-	 * @param valueLength The number of wanted decimal places (Should be a value
-	 *                    above 0)
-	 * @return A formatted value as a string
+	 * Prevents an instance of this class
 	 */
-	public static String getFormattedValue(double value, int valueLength) {
-		DecimalFormat formatter = new DecimalFormat("#." + StringUtils.repeatString("#", valueLength));
-		return formatter.format(value);
+	private StringUtils() {
 	}
 }

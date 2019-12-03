@@ -14,14 +14,14 @@ import com.robototes.utils.StringUtils;
 public class Time implements IUnit<Time> {
 
 	/**
-	 * The time unit
-	 */
-	public double time;
-
-	/**
 	 * The main unit for time
 	 */
 	public static TimeUnits mainUnit = TimeUnits.SECOND;
+
+	/**
+	 * The time unit
+	 */
+	public double time;
 
 	/**
 	 * 
@@ -47,39 +47,13 @@ public class Time implements IUnit<Time> {
 	}
 
 	@Override
-	public Time subtract(Time other) {
-		return new Time(this.time - other.time);
-	}
-
-	@Override
-	public double getValue() {
-		return time;
-	}
-
-	@Override
-	public String getUnit() {
-		return mainUnit.getUnit();
-	}
-
-	@Override
-	public Time divide(Time other) {
-		return new Time(this.time / other.time);
-	}
-
-	@Override
-	public Time multiply(Time other) {
-		return new Time(this.time * other.time);
-
-	}
-
-	@Override
 	public <K extends IUnitType<K>> double convertTo(K unitType) {
 		return unitType.getRatio().calculateReverseRatio(time);
 	}
 
 	@Override
-	public String toString() {
-		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	public Time divide(Time other) {
+		return new Time(this.time / other.time);
 	}
 
 	@Override
@@ -93,6 +67,32 @@ public class Time implements IUnit<Time> {
 	public boolean equals(Time other) {
 		return MathUtils.epsilonEquals(this.getValue(), other.getValue(), 0.00001);
 		// Epsilion is too big with conversion values
+	}
+
+	@Override
+	public String getUnit() {
+		return mainUnit.getUnit();
+	}
+
+	@Override
+	public double getValue() {
+		return time;
+	}
+
+	@Override
+	public Time multiply(Time other) {
+		return new Time(this.time * other.time);
+
+	}
+
+	@Override
+	public Time subtract(Time other) {
+		return new Time(this.time - other.time);
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
 
 }

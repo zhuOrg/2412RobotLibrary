@@ -14,13 +14,13 @@ import com.robototes.utils.StringUtils;
 public class Distance implements IUnit<Distance> {
 
 	/**
-	 * distance of the unit
-	 */
-	public double distance;
-	/**
 	 * the main unit
 	 */
 	public static DistanceUnits mainUnit = DistanceUnits.METER;
+	/**
+	 * distance of the unit
+	 */
+	public double distance;
 
 	/**
 	 * Creates a distance with a meter value
@@ -47,13 +47,8 @@ public class Distance implements IUnit<Distance> {
 	}
 
 	@Override
-	public Distance subtract(Distance other) {
-		return new Distance(this.distance - other.distance);
-	}
-
-	@Override
-	public Distance multiply(Distance other) {
-		return new Distance(this.distance * other.distance);
+	public <K extends IUnitType<K>> double convertTo(K unitType) {
+		return unitType.getRatio().calculateReverseRatio(distance);
 	}
 
 	@Override
@@ -61,24 +56,8 @@ public class Distance implements IUnit<Distance> {
 		return new Distance(this.distance / other.distance);
 	}
 
-	@Override
-	public double getValue() {
-		return distance;
-	}
-
-	@Override
-	public String getUnit() {
-		return mainUnit.getUnit();
-	}
-
-	@Override
-	public <K extends IUnitType<K>> double convertTo(K unitType) {
-		return unitType.getRatio().calculateReverseRatio(distance);
-	}
-
-	@Override
-	public String toString() {
-		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
+	public boolean equals(Distance other) {
+		return MathUtils.epsilonEquals(distance, other.distance, 0.00001); // Epsilion is too big with conversion values
 	}
 
 	@Override
@@ -89,7 +68,28 @@ public class Distance implements IUnit<Distance> {
 		return equals((Distance) obj);
 	}
 
-	public boolean equals(Distance other) {
-		return MathUtils.epsilonEquals(distance, other.distance, 0.00001); // Epsilion is too big with conversion values
+	@Override
+	public String getUnit() {
+		return mainUnit.getUnit();
+	}
+
+	@Override
+	public double getValue() {
+		return distance;
+	}
+
+	@Override
+	public Distance multiply(Distance other) {
+		return new Distance(this.distance * other.distance);
+	}
+
+	@Override
+	public Distance subtract(Distance other) {
+		return new Distance(this.distance - other.distance);
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.getFormattedValue(getValue(), 4) + this.getUnit();
 	}
 }

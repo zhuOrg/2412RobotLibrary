@@ -22,8 +22,27 @@ public class InterpolatingDouble implements Interpolable<InterpolatingDouble>, I
 	}
 
 	@Override
+	public InterpolatingDouble add(InterpolatingDouble other) {
+		return new InterpolatingDouble(this.value + other.value);
+	}
+
+	@Override
 	public int compareTo(InterpolatingDouble other) {
 		return Double.compare(value, other.value);
+	}
+
+	@Override
+	public InterpolatingDouble divide(InterpolatingDouble other) {
+		return new InterpolatingDouble(this.value / other.value);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof InterpolatingDouble)) {
+			return false;
+		}
+
+		return MathUtils.epsilonEquals(value, ((InterpolatingDouble) obj).value, MathUtils.EPSILON);
 	}
 
 	@Override
@@ -41,31 +60,12 @@ public class InterpolatingDouble implements Interpolable<InterpolatingDouble>, I
 	}
 
 	@Override
-	public InterpolatingDouble add(InterpolatingDouble other) {
-		return new InterpolatingDouble(this.value + other.value);
-	}
-
-	@Override
-	public InterpolatingDouble subtract(InterpolatingDouble other) {
-		return new InterpolatingDouble(this.value - other.value);
-	}
-
-	@Override
 	public InterpolatingDouble multiply(InterpolatingDouble other) {
 		return new InterpolatingDouble(this.value * other.value);
 	}
 
 	@Override
-	public InterpolatingDouble divide(InterpolatingDouble other) {
-		return new InterpolatingDouble(this.value / other.value);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof InterpolatingDouble)) {
-			return false;
-		}
-
-		return MathUtils.epsilonEquals(value, ((InterpolatingDouble) obj).value, MathUtils.EPSILON);
+	public InterpolatingDouble subtract(InterpolatingDouble other) {
+		return new InterpolatingDouble(this.value - other.value);
 	}
 }

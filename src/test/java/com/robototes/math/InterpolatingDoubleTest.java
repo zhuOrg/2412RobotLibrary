@@ -7,6 +7,14 @@ import org.junit.Test;
 public class InterpolatingDoubleTest {
 
 	@Test
+	public void testAdd() {
+		InterpolatingDouble one = new InterpolatingDouble(5d);
+		InterpolatingDouble two = new InterpolatingDouble(2d);
+
+		assertEquals("Add", one.add(two), new InterpolatingDouble(7d));
+	}
+
+	@Test
 	public void testCompareTo() {
 		InterpolatingDouble one = new InterpolatingDouble(5d);
 		InterpolatingDouble two = new InterpolatingDouble(4d);
@@ -16,6 +24,14 @@ public class InterpolatingDoubleTest {
 
 		two = new InterpolatingDouble(5d);
 		assertTrue("Comparing two equal values", one.compareTo(two) == 0);
+	}
+
+	@Test
+	public void testDivide() {
+		InterpolatingDouble one = new InterpolatingDouble(5d);
+		InterpolatingDouble two = new InterpolatingDouble(2d);
+
+		assertEquals("Divide", one.divide(two), new InterpolatingDouble(2.5d));
 	}
 
 	@Test
@@ -36,22 +52,6 @@ public class InterpolatingDoubleTest {
 	}
 
 	@Test
-	public void testAdd() {
-		InterpolatingDouble one = new InterpolatingDouble(5d);
-		InterpolatingDouble two = new InterpolatingDouble(2d);
-
-		assertEquals("Add", one.add(two), new InterpolatingDouble(7d));
-	}
-
-	@Test
-	public void testSubtract() {
-		InterpolatingDouble one = new InterpolatingDouble(5d);
-		InterpolatingDouble two = new InterpolatingDouble(2d);
-
-		assertEquals("Subtract", one.subtract(two), new InterpolatingDouble(3d));
-	}
-
-	@Test
 	public void testMultiply() {
 		InterpolatingDouble one = new InterpolatingDouble(5d);
 		InterpolatingDouble two = new InterpolatingDouble(2d);
@@ -60,11 +60,11 @@ public class InterpolatingDoubleTest {
 	}
 
 	@Test
-	public void testDivide() {
+	public void testSubtract() {
 		InterpolatingDouble one = new InterpolatingDouble(5d);
 		InterpolatingDouble two = new InterpolatingDouble(2d);
 
-		assertEquals("Divide", one.divide(two), new InterpolatingDouble(2.5d));
+		assertEquals("Subtract", one.subtract(two), new InterpolatingDouble(3d));
 	}
 
 }

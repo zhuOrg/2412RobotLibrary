@@ -15,7 +15,7 @@ public class UsePIDCommand<T extends IUnit<T>> extends Command {
 		this.finalPosition = finalPosition;
 		this.howCloseMustItBe = howCloseMustItBe;
 	}
-	
+
 	@Override
 	public void execute() {
 		PIDSubsystem.usePID();

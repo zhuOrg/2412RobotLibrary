@@ -9,22 +9,12 @@ package com.robototes.math;
 public interface Ratio<T> {
 
 	/**
+	 * With the ratio from:to, it calculates the to
 	 * 
-	 * @return The double value of the ratio
+	 * @param from left side of the ratio as a pure double value
+	 * @return right side of the ratio
 	 */
-	public double getRatio();
-
-	/**
-	 * 
-	 * @return The label of the from
-	 */
-	public String getFrom();
-
-	/**
-	 * 
-	 * @return label of the to
-	 */
-	public String getTo();
+	public double calculateRatio(double from);
 
 	/**
 	 * With the ratio from:to, it calculates the to
@@ -35,12 +25,12 @@ public interface Ratio<T> {
 	public double calculateRatio(T from);
 
 	/**
-	 * With the ratio from:to, it calculates the to
+	 * With the ratio from:to, it calculates the from
 	 * 
-	 * @param from left side of the ratio as a pure double value
-	 * @return right side of the ratio
+	 * @param to right side of the ratio as a pure double value
+	 * @return left side of the ratio
 	 */
-	public double calculateRatio(double from);
+	public double calculateReverseRatio(double to);
 
 	/**
 	 * With the ratio from:to, it calculates the from
@@ -51,16 +41,26 @@ public interface Ratio<T> {
 	public double calculateReverseRatio(T to);
 
 	/**
-	 * With the ratio from:to, it calculates the from
 	 * 
-	 * @param to right side of the ratio as a pure double value
-	 * @return left side of the ratio
+	 * @return The label of the from
 	 */
-	public double calculateReverseRatio(double to);
+	public String getFrom();
 
 	/**
 	 * 
 	 * @return The inverse of the ratio
 	 */
 	public Ratio<T> getInverseRatio();
+
+	/**
+	 * 
+	 * @return The double value of the ratio
+	 */
+	public double getRatio();
+
+	/**
+	 * 
+	 * @return label of the to
+	 */
+	public String getTo();
 }

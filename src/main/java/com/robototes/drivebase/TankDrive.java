@@ -48,12 +48,21 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 	}
 
 	@Override
-	public void joystickDrive(Joystick stick) {
-		setControlMode(ControlMode.MANUAL);
+	public void addAngle(Rotations rotation) {
+		if (mode != ControlMode.ROTATION) {
+			return;
+		}
+		rotationSetPostition = rotationSetPostition.add(rotation);
+	}
 
-		double[] cubedInputs = JoystickUtils.cubeValues(stick);
+	@Override
+	public void addDistanceDrive(Distance distance) {
+		if (mode != ControlMode.DISTANCE) {
+			return;
+		}
 
-		drive(cubedInputs[1], cubedInputs[2]);
+		left.addRefecence(distance);
+		right.addRefecence(distance);
 	}
 
 	@Override
@@ -91,30 +100,13 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 	}
 
 	@Override
-	public void stop() {
-		setControlMode(ControlMode.NONE);
-
-		for (T motor : motors) {
-			motor.setSpeed(0);
-		}
+	public ControlMode getControlMode() {
+		return mode;
 	}
 
 	@Override
-	public void addDistanceDrive(Distance distance) {
-		if (mode != ControlMode.DISTANCE) {
-			return;
-		}
-
-		left.addRefecence(distance);
-		right.addRefecence(distance);
-	}
-
-	@Override
-	public void setSnapToAngle(Rotations rotation) {
-		if (mode != ControlMode.ROTATION) {
-			return;
-		}
-		rotationSetPostition = rotation;
+	public Rotations getHeading() {
+		return gyro.getRotations();
 	}
 
 	@Override
@@ -123,14 +115,17 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 	}
 
 	@Override
-	public void setVector(Vector path) {
-		if (mode != ControlMode.VECTOR) {
-			return;
-		}
-		mode = ControlMode.DISTANCE;
-		addDistanceDrive(new Distance(path.length));
-		mode = ControlMode.ROTATION;
-		addAngle(new Rotations(path.angle, RotationUnits.RADIAN));
+	public Distance getTotalDistance() {
+		return left.getError().add(right.getError()).divide(new Distance(2));
+	}
+
+	@Override
+	public void joystickDrive(Joystick stick) {
+		setControlMode(ControlMode.MANUAL);
+
+		double[] cubedInputs = JoystickUtils.cubeValues(stick);
+
+		drive(cubedInputs[1], cubedInputs[2]);
 	}
 
 	@Override
@@ -145,17 +140,31 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 	}
 
 	@Override
-	public ControlMode getControlMode() {
-		return mode;
+	public void setSnapToAngle(Rotations rotation) {
+		if (mode != ControlMode.ROTATION) {
+			return;
+		}
+		rotationSetPostition = rotation;
 	}
 
 	@Override
-	public void useDistancePID() {
-		if (this.mode != ControlMode.DISTANCE) {
+	public void setVector(Vector path) {
+		if (mode != ControlMode.VECTOR) {
 			return;
 		}
-		left.usePID();
-		right.usePID();
+		mode = ControlMode.DISTANCE;
+		addDistanceDrive(new Distance(path.length));
+		mode = ControlMode.ROTATION;
+		addAngle(new Rotations(path.angle, RotationUnits.RADIAN));
+	}
+
+	@Override
+	public void stop() {
+		setControlMode(ControlMode.NONE);
+
+		for (T motor : motors) {
+			motor.setSpeed(0);
+		}
 	}
 
 	@Override
@@ -172,21 +181,12 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 	}
 
 	@Override
-	public Distance getTotalDistance() {
-		return left.getError().add(right.getError()).divide(new Distance(2));
-	}
-
-	@Override
-	public Rotations getHeading() {
-		return gyro.getRotations();
-	}
-
-	@Override
-	public void addAngle(Rotations rotation) {
-		if (mode != ControlMode.ROTATION) {
+	public void useDistancePID() {
+		if (this.mode != ControlMode.DISTANCE) {
 			return;
 		}
-		rotationSetPostition = rotationSetPostition.add(rotation);
+		left.usePID();
+		right.usePID();
 	}
 
 }

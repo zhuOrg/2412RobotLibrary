@@ -12,12 +12,6 @@ public class DefaultUnitTest {
 	// du is the unit label for DefaultUnit in this test
 
 	@Test
-	public void testDefaultUnit() {
-		DefaultUnit unit = new DefaultUnit(1, "du");
-		assertEquals("Default Unit", unit.value, 1, MathUtils.EPSILON);
-	}
-
-	@Test
 	public void testAdd() {
 		DefaultUnit one = new DefaultUnit(5, "du");
 		DefaultUnit two = new DefaultUnit(6, "du");
@@ -29,21 +23,18 @@ public class DefaultUnitTest {
 	}
 
 	@Test
-	public void testSubtract() {
-		DefaultUnit one = new DefaultUnit(6, "du");
-		DefaultUnit two = new DefaultUnit(5, "du");
-		assertEquals("Subtract whole DefaultUnit", one.subtract(two), new DefaultUnit(1, "du"));
+	public void testConvertTo() {
+		DefaultUnit oneDu = new DefaultUnit(1, "du");
 
-		DefaultUnit three = new DefaultUnit(3.5, "du");
-		DefaultUnit four = new DefaultUnit(.1, "du");
-		assertEquals("Subtract two different DefaultUnits", three.subtract(four), new DefaultUnit(3.4, "du"));
+		double epsilon = 0.00001; // MathUtils.Epsilon is too small for the inaccuracies in conversion
+
+		assertEquals("Default unit to cm", oneDu.convertTo(DistanceUnits.CENTIMETER), 100, epsilon);
 	}
 
 	@Test
-	public void testMultiply() {
-		DefaultUnit one = new DefaultUnit(5, "du");
-		DefaultUnit scalar = new DefaultUnit(2, "du");
-		assertEquals("Scale a DefaultUnit up", one.multiply(scalar), new DefaultUnit(10, "du"));
+	public void testDefaultUnit() {
+		DefaultUnit unit = new DefaultUnit(1, "du");
+		assertEquals("Default Unit", unit.value, 1, MathUtils.EPSILON);
 	}
 
 	@Test
@@ -60,12 +51,21 @@ public class DefaultUnitTest {
 	}
 
 	@Test
-	public void testConvertTo() {
-		DefaultUnit oneDu = new DefaultUnit(1, "du");
+	public void testMultiply() {
+		DefaultUnit one = new DefaultUnit(5, "du");
+		DefaultUnit scalar = new DefaultUnit(2, "du");
+		assertEquals("Scale a DefaultUnit up", one.multiply(scalar), new DefaultUnit(10, "du"));
+	}
 
-		double epsilon = 0.00001; // MathUtils.Epsilon is too small for the inaccuracies in conversion
+	@Test
+	public void testSubtract() {
+		DefaultUnit one = new DefaultUnit(6, "du");
+		DefaultUnit two = new DefaultUnit(5, "du");
+		assertEquals("Subtract whole DefaultUnit", one.subtract(two), new DefaultUnit(1, "du"));
 
-		assertEquals("Default unit to cm", oneDu.convertTo(DistanceUnits.CENTIMETER), 100, epsilon);
+		DefaultUnit three = new DefaultUnit(3.5, "du");
+		DefaultUnit four = new DefaultUnit(.1, "du");
+		assertEquals("Subtract two different DefaultUnits", three.subtract(four), new DefaultUnit(3.4, "du"));
 	}
 
 	@Test
