@@ -24,6 +24,12 @@
 					<include>utils/*.java</include>
 					<include>units/*.java</include>
 				</includes>
+				<excludes>
+					<exclude>control/*.java</exclude>
+					<exclude>drivebase/*.java</exclude>
+					<exclude>motors/*.java</exclude>
+					<exclude>sensors/*.java</exclude>
+				</excludes>
 			</resource>
 			<resource>
 				<directory>src/test/java/com/robototes</directory>
