@@ -1,3 +1,8 @@
+<p align="center">
+   Current test status: 
+  <a href="https://github.com/robototes/2412Library"><img alt="Test status" src="https://github.com/robototes/2412RobotLibrary/workflows/Java CI/badge.svg"></a>
+</p>
+
 # 2412RobotLibrary
 A new library to replace the old one that was never used
 
