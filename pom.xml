@@ -14,10 +14,10 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<excludes>
-						<exclude>${project.basedir}/src/main/java/com/robototes/control/*.java</exclude>
-						<exclude>${project.basedir}/src/main/java/com/robototes/drivebase/*.java</exclude>
-						<exclude>${project.basedir}/src/main/java/com/robototes/motors/*.java</exclude>
-						<exclude>${project.basedir}/src/main/java/com/robototes/sensors/*.java</exclude>
+						<exclude>**/com/robototes/control/*.java</exclude>
+						<exclude>**/com/robototes/drivebase/*.java</exclude>
+						<exclude>**/com/robototes/motors/*.java</exclude>
+						<exclude>**/com/robototes/sensors/*.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
