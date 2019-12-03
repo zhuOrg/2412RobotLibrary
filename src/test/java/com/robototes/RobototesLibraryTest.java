@@ -8,7 +8,7 @@ public class RobototesLibraryTest {
 
 	@Test
 	public void testGetVersion() {
-		assertEquals("Get current version of library", "0.0.1", RobototesLibrary.getVersion());
+		assertEquals("Get current version of library", "0.1", RobototesLibrary.getVersion());
 	}
 
 }
