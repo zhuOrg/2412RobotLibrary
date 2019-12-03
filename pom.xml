@@ -42,7 +42,7 @@
 			<artifactId>spark</artifactId>
 			<version>1</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/src/libs/SparkMax-java-1.0.27.jar</systemPath>
+			<systemPath>${project.basedir}/src/libs/SparkMax-java-1.4.1.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>
