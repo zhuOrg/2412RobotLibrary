@@ -16,6 +16,22 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java/com/robototes</directory>
+				<includes>
+					<include>math/*.java</include>
+					<include>utils/*.java</include>
+					<include>units/*.java</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/test/java/com/robototes</directory>
+				<includes>
+					<include>**/*.java</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 	<dependencies>
 		<dependency>
