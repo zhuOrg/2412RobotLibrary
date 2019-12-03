@@ -15,7 +15,7 @@ public class StringUtilsTest {
 	@Test
 	public void testRepeatString() {
 		String base = "hi";
-		assertEquals("Repeating a base String", StringUtils.repeatString(base, 3), "hihihihi");
+		assertEquals("Repeating a base String", StringUtils.repeatString(base, 3), "hihihi");
 	}
 
 }
