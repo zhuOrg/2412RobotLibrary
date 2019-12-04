@@ -1,8 +1,8 @@
 package com.robototes.control;
 
 import com.robototes.units.InterUnitRatio;
-import com.robototes.units.UnitTypes.RotationUnits;
 import com.robototes.units.Rotations;
+import com.robototes.units.UnitTypes.RotationUnits;
 
 /**
  * A gearbox representation in the program
