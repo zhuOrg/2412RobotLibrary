@@ -6,7 +6,7 @@ import com.robototes.units.UnitTypes.IUnitType;
 /**
  * An interface to make all units have stuff in common
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <T> The class of the unit
  */

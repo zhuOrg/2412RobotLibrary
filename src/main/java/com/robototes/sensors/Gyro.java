@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.SPI.Port;
 /**
  * An extension of ADXRS450_Gyro so that new programmers can do it easier.
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class Gyro extends ADXRS450_Gyro {

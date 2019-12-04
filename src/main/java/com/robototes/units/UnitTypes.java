@@ -5,7 +5,7 @@ import com.robototes.units.UsefulUnits.Voltage;
 /**
  * All the unit types are housed within this class
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class UnitTypes {
@@ -13,7 +13,7 @@ public class UnitTypes {
 	/**
 	 * List of different distance units
 	 * 
-	 * @author OroArmor
+	 * @author Eli Orona
 	 *
 	 */
 	public static enum DistanceUnits implements IUnitType<DistanceUnits> {
@@ -91,7 +91,7 @@ public class UnitTypes {
 
 	/**
 	 * 
-	 * @author OroArmor
+	 * @author Eli Orona
 	 *
 	 * @param <T> The Unit type
 	 */
@@ -125,7 +125,7 @@ public class UnitTypes {
 	/**
 	 * List of different rotation/angle units
 	 * 
-	 * @author OroArmor
+	 * @author Eli Orona
 	 *
 	 */
 	public static enum RotationUnits implements IUnitType<RotationUnits> {
@@ -183,7 +183,7 @@ public class UnitTypes {
 	/**
 	 * List of different time units
 	 * 
-	 * @author OroArmor
+	 * @author Eli Orona
 	 *
 	 */
 	public static enum TimeUnits implements IUnitType<TimeUnits> {
@@ -250,7 +250,7 @@ public class UnitTypes {
 	/**
 	 * List of different voltage units
 	 * 
-	 * @author OroArmor
+	 * @author Eli Orona
 	 *
 	 */
 	public static enum VoltageUnits implements IUnitType<VoltageUnits> {

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 /**
  * Some utils that help with a joystick
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class JoystickUtils {

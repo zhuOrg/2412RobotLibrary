@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * A set command for PID subsytems
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <K> Unit type of the subsystem
  */

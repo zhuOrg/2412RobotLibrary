@@ -6,14 +6,14 @@ import com.robototes.units.Rotations;
  * An abstract class all types of motor rotations extend to allow for better
  * ratios
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public abstract class MotorRotations extends Rotations {
 	/**
 	 * Rotations for CANSparkMax
 	 * 
-	 * @author OroArmor
+	 * @author Eli Orona
 	 *
 	 */
 	public static class SparkMaxRotations extends MotorRotations {

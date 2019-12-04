@@ -5,7 +5,7 @@ package com.robototes.PIDControls;
  * A wrapper class for a list of PID Constants, making it easy to apply the same
  * constants in many places, or switch during run time.
  * 
- * @author OroArmor
+ * @author Eli Orona
  * 
  * 
  */

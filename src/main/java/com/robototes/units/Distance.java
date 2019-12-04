@@ -8,7 +8,7 @@ import com.robototes.utils.StringUtils;
 /**
  * A representation of distance in the program. Default unit is the meter.
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class Distance implements IUnit<Distance> {

@@ -6,7 +6,7 @@ import com.robototes.units.IUnit;
 /**
  * An interface all PID Subsystems will use so things go smoothly
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <T> Motors used in the subsystem
  * @param <K> Unit type of the subsystem

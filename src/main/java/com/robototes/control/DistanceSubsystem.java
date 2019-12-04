@@ -11,7 +11,7 @@ import com.robototes.units.UnitTypes.RotationUnits;
 /**
  * A subsystem with PID control for distance
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <T> Motors used
  */

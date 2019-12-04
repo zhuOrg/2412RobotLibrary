@@ -6,7 +6,7 @@ import com.robototes.units.Time;
 /**
  * An easy way to set up PID control with a motor
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <T> The rotation type of the motor
  */

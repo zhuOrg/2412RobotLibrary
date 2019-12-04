@@ -5,7 +5,7 @@ import com.robototes.math.MathUtils;
 /**
  * A calculator for a PID system.
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class PIDController {

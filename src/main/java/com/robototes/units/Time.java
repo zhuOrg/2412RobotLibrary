@@ -8,7 +8,7 @@ import com.robototes.utils.StringUtils;
 /**
  * A representation of time in the program
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class Time implements IUnit<Time> {

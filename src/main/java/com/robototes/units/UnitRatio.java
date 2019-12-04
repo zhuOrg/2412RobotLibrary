@@ -8,7 +8,7 @@ import com.robototes.utils.StringUtils;
 /**
  * A ratio between different types of the same unit
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <T> The Unit for the ratio
  */
