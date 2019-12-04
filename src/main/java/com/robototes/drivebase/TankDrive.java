@@ -24,11 +24,10 @@ public class TankDrive<T extends PIDMotorController<?>> implements IDrivebase<T>
 	DistanceSubsystem<T> left;
 	DistanceSubsystem<T> right;
 	T[] motors;
-	// Gryo gryo;
-	PIDController rotationPIDController;
 
 	ControlMode mode;
 
+	PIDController rotationPIDController;
 	Rotations rotationSetPostition;
 	Gyro gyro;
 
