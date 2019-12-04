@@ -8,7 +8,7 @@ import com.robototes.units.UnitTypes.RotationUnits;
 /**
  * A subsystem that rotates with PID Control.
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <T> Motors used
  */

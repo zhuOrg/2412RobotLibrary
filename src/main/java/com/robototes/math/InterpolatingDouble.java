@@ -2,7 +2,7 @@ package com.robototes.math;
 
 /**
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class InterpolatingDouble implements Interpolable<InterpolatingDouble>, InverseInterpolable<InterpolatingDouble>,

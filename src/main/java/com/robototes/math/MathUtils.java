@@ -4,14 +4,14 @@ import static java.lang.Math.*;
 
 /**
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class MathUtils {
 
 	/**
 	 * 
-	 * @author OroArmor
+	 * @author Eli Orona
 	 *
 	 */
 	public static interface MathFunction {

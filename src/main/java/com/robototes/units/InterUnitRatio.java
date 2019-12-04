@@ -9,7 +9,7 @@ import com.robototes.utils.StringUtils;
  * 
  * Forms a ratio between two different unit types, ie rotations to meters
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <K> Unit type one
  * @param <V> Unit type two

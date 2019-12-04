@@ -9,7 +9,7 @@ public class UsefulUnits {
 	/**
 	 * Representation of volts in the program
 	 * 
-	 * @author OroArmor
+	 * @author Eli Orona
 	 *
 	 */
 	public static class Voltage implements IUnit<Voltage> {

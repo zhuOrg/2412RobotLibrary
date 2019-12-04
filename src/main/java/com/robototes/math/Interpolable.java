@@ -2,7 +2,7 @@ package com.robototes.math;
 
 /**
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  * @param <T> The type to be interpolated
  */

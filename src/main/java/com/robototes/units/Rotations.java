@@ -8,7 +8,7 @@ import com.robototes.utils.StringUtils;
 /**
  * A representation of rotations in the program
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class Rotations implements IUnit<Rotations> {

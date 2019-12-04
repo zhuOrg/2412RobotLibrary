@@ -4,7 +4,7 @@ import com.robototes.utils.StringUtils;
 
 /**
  * 
- * @author OroArmor
+ * @author Eli Orona
  *
  */
 public class DoubleRatio implements Ratio<Double> {

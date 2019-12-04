@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 /**
  * A bunch of useful string functions
  * 
- * @author OroArmor
+ * @author Eli Orona
  */
 public class StringUtils {
 
