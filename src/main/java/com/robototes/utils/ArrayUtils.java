@@ -11,4 +11,17 @@ public class ArrayUtils {
 		System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
 		return joinedArray;
 	}
+	
+	public static <T> String printArray(T[] array) {
+		int counter = 0;
+		String string = "";
+		for(T value : array) {
+			string += "["+(counter++)+"]: "+value;
+			if(counter!=array.length) {
+				string +=", ";
+			}
+		}
+		System.out.println(string);
+		return string;
+	}
 }
