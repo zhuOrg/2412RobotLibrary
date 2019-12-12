@@ -13,21 +13,48 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<excludes>
-						<exclude>**/com/robototes/control/*.java</exclude>
-						<exclude>**/com/robototes/drivebase/*.java</exclude>
-						<exclude>**/com/robototes/motors/*.java</exclude>
-						<exclude>**/com/robototes/sensors/*.java</exclude>
-					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>central</name>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>wpi</id>
+			<name>wpi</name>
+			<url>https://first.wpi.edu/FRC/roborio/maven/</url>
+		</repository>
+		<repository>
+			<id>rev</id>
+			<name>rev</name>
+			<url>http://www.revrobotics.com/content/sw/max/sdk/maven/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.wpi.first.wpilibj</groupId>
+			<artifactId>wpilibj-java</artifactId>
+			<version>2019.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.wpi.first.wpiutil</groupId>
+			<artifactId>wpiutil-java</artifactId>
+			<version>2019.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.revrobotics.frc</groupId>
+			<artifactId>SparkMax-java</artifactId>
+			<version>1.5.0</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -10,12 +10,23 @@ plugins {
 repositories {
     mavenLocal()
     maven {
-        url = 'http://repo.maven.apache.org/maven2'
+        url = 'https://repo1.maven.org/maven2/'
+    }
+
+    maven {
+        url = 'https://first.wpi.edu/FRC/roborio/maven/'
+    }
+
+    maven {
+        url = 'http://www.revrobotics.com/content/sw/max/sdk/maven/'
     }
 }
 
 dependencies {
     compile 'junit:junit:4.12'
+    compile 'edu.wpi.first.wpilibj:wpilibj-java:2019.4.1'
+    compile 'edu.wpi.first.wpiutil:wpiutil-java:2019.4.1'
+    compile 'com.revrobotics.frc:SparkMax-java:1.5.0'
 }
 
 group = '2412RobotLibrary'
