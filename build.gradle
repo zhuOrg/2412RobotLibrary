@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'eclipse'
 }
 
 repositories {
@@ -31,7 +32,7 @@ dependencies {
 
 group = '2412RobotLibrary'
 version = '0.1'
-sourceCompatibility = '1.8'
+sourceCompatibility = '1.11'
 
 publishing {
     publications {
