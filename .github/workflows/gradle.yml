@@ -13,7 +13,13 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.11
+
+    - run: echo $JAVA_HOME 
+   
     - name: Test with Gradle
       uses: MrRamych/gradle-actions/openjdk-11@3.1
       with:
         args: test
+      env:
+        JAVA_HOME: /opt/hostedtoolcache/jdk/11.0.5/x64
+        JAVA_HOME_11.0.5_x64: /opt/hostedtoolcache/jdk/11.0.5/x64
