@@ -14,6 +14,6 @@ jobs:
       with:
         java-version: 1.11
     - name: Test with Gradle
-      uses: MrRamych/gradle-actions/openjdk-12@3.1
+      uses: MrRamych/gradle-actions/openjdk-11@3.1
       with:
         args: test
